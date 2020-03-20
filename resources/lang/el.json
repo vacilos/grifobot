@@ -1,0 +1,13 @@
+{
+    "Name": "Ψευδώνυμο",
+    "E-Mail Address": "E-mail",
+    "Register": "Εγγραφή",
+    "Password": "Κωδικός",
+    "Confirm Password": "Επιβεβαίωση Κωδικού",
+    "Login": "Είσοδος",
+    "Remember Me": "Να με θυμάται",
+    "Forgot Your Password?": "Ξέχασες τον κωδικό",
+    "Logout": "Έξοδος",
+    "Username": "Ψευδώνυμο",
+    "validation.min.string": "Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες"
+}
