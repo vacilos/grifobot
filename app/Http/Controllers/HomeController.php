@@ -2,19 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Score;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+
 
     /**
      * Show the application dashboard.
@@ -24,6 +17,36 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function welcome()
+    {
+
+        $dateTime = new \DateTime('-1 day');
+        $compareDate = $dateTime->format("Y-m-d H:i:s");
+        $stats = Score::selectRaw('sum(score) as totalScore, users.name as username')
+            ->join('users', 'users.id', '=', 'scores.user_id')
+            ->where('scores.updated_at', '>', $compareDate)
+            ->groupBy('users.name')
+            ->orderBy('totalScore', 'desc')
+            ->take(10)
+            ->get();
+
+        $scores = Score::all();
+        $total = 0;
+        $moves = 0;
+        $answers = 0;
+        $count = sizeof($scores);
+        foreach($scores as $score) {
+            $total += $score->score;
+            $moves += $score->movements;
+            $answers += intval($score->total);
+        }
+        return view('welcome', compact('count', 'total', 'moves', 'answers', 'stats'));
     }
 
     public function test() {

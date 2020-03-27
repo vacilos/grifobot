@@ -89,4 +89,12 @@ class User extends Authenticatable
         return true;
 
     }
+
+    /**
+     * The roles that belong to the user.
+     */
+    public function badges()
+    {
+        return $this->belongsToMany(Badge::class, 'users_badges');
+    }
 }

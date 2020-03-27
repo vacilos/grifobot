@@ -9,5 +9,8 @@
     "Forgot Your Password?": "Ξέχασες τον κωδικό",
     "Logout": "Έξοδος",
     "Username": "Ψευδώνυμο",
-    "validation.min.string": "Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες"
+    "validation.min.string": "Ο κωδικός πρέπει να είναι τουλάχιστον 8 χαρακτήρες",
+    "Reset Password": "Επαναφορά κωδικού",
+    "Send Password Reset Link": "Αποστολή συνδέσμου επαναφοράς κωδικού",
+    "Username Or Email": "Ψευδώνυμο ή Email"
 }

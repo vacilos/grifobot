@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-161556506-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-161556506-1');
+    </script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -17,7 +27,6 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap&subset=greek" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/98c292b2c4.js" crossorigin="anonymous"></script>
 
     <style type="text/css">
         .f {
@@ -52,6 +61,8 @@
             padding: 0 0.2em;
         }
     </style>
+    <link rel="stylesheet" href="{{ asset('fa/css/font-awesome.min.css') }}">
+
     @yield('stylesheet')
 </head>
 <body>
@@ -157,11 +168,13 @@
             @yield('content')
         </main>
         <footer class="text-center">
-            Application designed with <i class="fas fa-heart" style="color: red;"></i> by <a href="http://gav.uop.gr"><img src="{{ asset('images/gav.png') }}" style="max-width:20px;">ΓΑΒ LAB</a><br/>
+            Application designed with <i class="fa fa-heart" style="color: red;"></i> by <a href="http://gav.uop.gr"><img src="{{ asset('images/gav.png') }}" style="max-width:20px;">ΓΑΒ LAB</a><br/>
 
             <small>
-                Images for human avatars created by Yannis Aggelakos<br/>
-                Images for animal avatars by freepik (<a href="http://www.freepik.com">Designed by Freepik</a>)
+                <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.1</a> | <a href="{{route('contact')}}">Επικοινωνία</a>
+                <br/>additional graphics designed by <a href="https://www.facebook.com/aggelakosPnM/" target="_blank">Yannis Aggelakos</a><br/>
+                Images for animal avatars by freepik (<a href="http://www.freepik.com">Designed by Freepik</a>)<br/>
+                tech support by <a href="http://osporos.com">O Sporos</a>
             </small>
             <br/>
             <div class="float-right" id="footer_msg" style="font-size: 5px;"></div>

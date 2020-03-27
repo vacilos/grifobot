@@ -59,17 +59,17 @@
                 <div class="sticky-top">
                     <h2 class="text-center">{{Auth::user()->name}}</h2>
 
-                        <button id="bl" onclick="selectedAction('L');" class="btn  btn-info btn-lg"><i class="fas fa-arrow-left"></i></button>
-                        <button id="br" onclick="selectedAction('R');" class="btn  btn-info btn-lg"><i class="fas fa-arrow-right"></i></button>
-                        <button id="bu" onclick="selectedAction('U');" class="btn  btn-info btn-lg"><i class="fas fa-arrow-up"></i></button>
-                        <button id="bd" onclick="selectedAction('D');" class="btn  btn-info btn-lg"><i class="fas fa-arrow-down"></i></button>
+                        <button id="bl" onclick="selectedAction('L');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-left"></i></button>
+                        <button id="br" onclick="selectedAction('R');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-right"></i></button>
+                        <button id="bu" onclick="selectedAction('U');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-up"></i></button>
+                        <button id="bd" onclick="selectedAction('D');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-down"></i></button>
 
                     <h4>Κινήσεις</h4>
                     <span id="moves" style="font-size:26px;">
 
                     </span>
-                    <button id="bgo" onclick="go();" class="btn btn-lg btn-block btn-success"><i class="fas fa-play"></i> Ξεκίνα</button>
-                    <button id="bdel" onclick="clearMoves();" class="btn btn-danger float-right"><i class="fas fa-trash"></i></button>
+                    <button id="bgo" onclick="go();" class="btn btn-lg btn-block btn-success"><i class="fa fa-play"></i> Ξεκίνα</button>
+                    <button id="bdel" onclick="clearMoves();" class="btn btn-danger float-right"><i class="fa fa-trash"></i></button>
 
                     <hr style="clear:both;"/>
                     <h4>ΣΚΟΡ: <span id="score">0</span></h4>
@@ -148,7 +148,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                    Τώρα χρησιμοποίησε τα βελάκια για να οδηγήσεις τον παίκτη στο πράσινο κελι!<Br/>
+                    Τώρα χρησιμοποίησε τα βελάκια για να οδηγήσεις τον παίκτη στο χρωματιστό κελι!<Br/>
                     ΠΡΟΣΟΧΗ! Έχεις μόνο μία ευκαιρία και αν δοκιμάσεις να λύσεις άλλη άσκηση θα χάσεις τους πόντους.
                     </p>
                 </div>
@@ -224,15 +224,15 @@
                     <p>
                         <b>Βήμα 1: </b> Πάτα σε μία άσκηση<br/>
                         <b>Βήμα 2: </b> Λύσε την άσκηση γράφοντας τη σωστή απάντηση<br/>
-                        <b>Βήμα 3: </b> Αν βρήκες τη σωστή απάντηση, το τετράγωνο γίνεται πράσινο<br/>
-                        <b>Βήμα 4: </b> Χρησιμοποίησε τα βελάκια για να οδηγήσεις την εικόνα σου στο πράσινο τετράγωνο. Έχεις μια ευκαιρία!<br/>
-                        <b>Βήμα 5: </b> Αν φτάσεις στο πράσινο τετράγωνο κερδίζεις πόντους<br/>
+                        <b>Βήμα 3: </b> Αν βρήκες τη σωστή απάντηση, το τετράγωνο χρωματίζεται<br/>
+                        <b>Βήμα 4: </b> Χρησιμοποίησε τα βελάκια για να οδηγήσεις την εικόνα σου στο χρωματισμένο τετράγωνο. Έχεις μια ευκαιρία!<br/>
+                        <b>Βήμα 5: </b> Αν φτάσεις στο χρωματισμένο τετράγωνο κερδίζεις πόντους<br/>
                         <b>Βήμα 6: </b> Συνέχισε μέχρι να τελειώσουν όλες οι ασκήσεις στον πίνακα<br/>
                     </p>
                     <p>
                         <b>Προσοχή!</b>
                         <ul>
-                            <li>Κάθε φορά έχεις μία ευκαιρία να φτάσεις μέχρι το πράσινο τετράγωνο.</li>
+                            <li>Κάθε φορά έχεις μία ευκαιρία να φτάσεις μέχρι το χρωματισμένο τετράγωνο.</li>
                             <li>Απαγορεύεται να χτυπήσεις στις άκρες ή να πατήσεις στα μαύρα τετράγωνα!</li>
                         </ul>
                     </p>
@@ -290,22 +290,22 @@
 
         function selectedAction(i) {
             if(i == "L") {
-                $('#moves').append('<span id=movement'+move+'>'+move+'. <i class="fas fa-arrow-left"></i> #Α</span><br/>');
+                $('#moves').append('<span id=movement'+move+'>'+move+'. <i class="fa fa-arrow-left"></i> #Α</span><br/>');
                 moves.push('L');
                 move++;
             }
             else if(i== "R") {
-                $('#moves').append('<span id=movement'+move+'>'+move+'.  <i class="fas fa-arrow-right"></i> #Δ</span><br/>');
+                $('#moves').append('<span id=movement'+move+'>'+move+'.  <i class="fa fa-arrow-right"></i> #Δ</span><br/>');
                 moves.push('R');
                 move++;
             }
             else if(i== "U") {
-                $('#moves').append('<span id=movement'+move+'>'+move+'.  <i class="fas fa-arrow-up"></i> #Π</span><br/>');
+                $('#moves').append('<span id=movement'+move+'>'+move+'.  <i class="fa fa-arrow-up"></i> #Π</span><br/>');
                 moves.push('U');
                 move++;
             }
             else if(i== "D") {
-                $('#moves').append('<span id=movement'+move+'>'+move+'. <i class="fas fa-arrow-down"></i> #Κ</span><br/>');
+                $('#moves').append('<span id=movement'+move+'>'+move+'. <i class="fa fa-arrow-down"></i> #Κ</span><br/>');
                 moves.push('D');
                 move++;
             }
@@ -486,7 +486,7 @@
             if(answer == currentAnswer) {
                 // enable the keys!
                 $("#successModal").modal('show');
-                $('#pos'+currentQuestion).css('background-color', 'green');
+                $('#pos'+currentQuestion).css('background-color', 'magenta');
                 enableArrows();
 
             } else {

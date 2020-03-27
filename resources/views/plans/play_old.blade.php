@@ -44,18 +44,18 @@
             <div class="col-4">
                 <h2>Όνομα παίκτη</h2>
 
-                    <button id="bl" onclick="selectedAction('L');" class="btn  btn-info"><i class="fas fa-arrow-left"></i></button>
-                    <button id="br" onclick="selectedAction('R');" class="btn  btn-info"><i class="fas fa-arrow-right"></i></button>
-                    <button id="bu" onclick="selectedAction('U');" class="btn  btn-info"><i class="fas fa-arrow-up"></i></button>
-                    <button id="bd" onclick="selectedAction('D');" class="btn  btn-info"><i class="fas fa-arrow-down"></i></button>
+                    <button id="bl" onclick="selectedAction('L');" class="btn  btn-info"><i class="fa fa-arrow-left"></i></button>
+                    <button id="br" onclick="selectedAction('R');" class="btn  btn-info"><i class="fa fa-arrow-right"></i></button>
+                    <button id="bu" onclick="selectedAction('U');" class="btn  btn-info"><i class="fa fa-arrow-up"></i></button>
+                    <button id="bd" onclick="selectedAction('D');" class="btn  btn-info"><i class="fa fa-arrow-down"></i></button>
 
 
                 <h3>Κινήσεις</h3>
                 <span id="moves" style="font-size:26px;">
 
                 </span>
-                <button id="bgo" onclick="go();" class="btn btn-lg btn-block btn-success"><i class="fas fa-play"></i> Εκκίνηση</button>
-                <button id="bdel" onclick="clearMoves();" class="btn btn-danger float-right"><i class="fas fa-trash"></i></button>
+                <button id="bgo" onclick="go();" class="btn btn-lg btn-block btn-success"><i class="fa fa-play"></i> Εκκίνηση</button>
+                <button id="bdel" onclick="clearMoves();" class="btn btn-danger float-right"><i class="fa fa-trash"></i></button>
             </div>
         </div>
 
@@ -149,22 +149,22 @@
 
         function selectedAction(i) {
             if(i == "L") {
-                $('#moves').append(move+'. <i class="fas fa-arrow-left"></i> #Α<br/>');
+                $('#moves').append(move+'. <i class="fa fa-arrow-left"></i> #Α<br/>');
                 moves.push('L');
                 move++;
             }
             else if(i== "R") {
-                $('#moves').append(move +'. <i class="fas fa-arrow-right"></i> #Δ<br/>');
+                $('#moves').append(move +'. <i class="fa fa-arrow-right"></i> #Δ<br/>');
                 moves.push('R');
                 move++;
             }
             else if(i== "U") {
-                $('#moves').append(move +'. <i class="fas fa-arrow-up"></i> #Π<br/>');
+                $('#moves').append(move +'. <i class="fa fa-arrow-up"></i> #Π<br/>');
                 moves.push('U');
                 move++;
             }
             else if(i== "D") {
-                $('#moves').append(move +'. <i class="fas fa-arrow-down"></i> #Κ<br/>');
+                $('#moves').append(move +'. <i class="fa fa-arrow-down"></i> #Κ<br/>');
                 moves.push('D');
                 move++;
             }

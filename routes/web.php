@@ -10,12 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
+Route::get('site/shutdown', function(){
+    return Artisan::call('down');
 });
+Route::get('/', 'HomeController@welcome')->name('welcome');
+Route::get('/home', 'HomeController@welcome')->name('welcome');
 
 Route::get('/test', 'HomeController@test')->name('test');
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
@@ -24,9 +26,17 @@ Route::get('/help', function () {
     return view('help');
 })->name('help');
 
+Route::get('/version', function () {
+    return view('version');
+})->name('version');
+
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
+
+Route::get('/logo', function () {
+    return view('logo');
+})->name('logo');
 
 Auth::routes();
 
@@ -37,12 +47,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin', 'auth']], func
     Route::get('/maths/{level}/show', 'MathController@level')->name('maths_level');
     Route::resource('/plans', 'PlanController');
     Route::resource('/categories', 'CategoryController');
+    Route::resource('/badges', 'BadgeController');
 
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
     Route::get('/home', 'UserController@index')->name('user_home');
     Route::get('/games', 'UserController@games')->name('user_games');
+    Route::get('/badges', 'UserController@badges')->name('user_badges');
+    Route::get('/stats', 'UserController@stats')->name('user_stats');
+    Route::get('/statsalltime', 'UserController@statsAllTime')->name('user_stats_all_time');
     Route::get('/createprofile', 'UserController@createProfile')->name('user_create_profile');
     Route::post('/storeprofile', 'UserController@storeProfile')->name('user_store_profile');
     Route::get('/changeprofile', 'UserController@changeProfile')->name('user_change_profile');
