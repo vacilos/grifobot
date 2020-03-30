@@ -100,11 +100,11 @@
             <div class="row">
                 <div class="col-sm-8">
                     <div class="title m-b-md">
-                        Γριφο<span style="color: magenta;">μπότ</span> <span style="font-size: 11px;">έκδοση 1.1</span>
+                        Γριφο<span style="color: cyan;">μπότ</span> <span style="font-size: 11px;">έκδοση 1.2</span>
                     </div>
                     <div>
                         <p>
-                            Παιχνίδι για μαθητές δημοτικού για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα
+                            Παιχνίδι για μαθητές <s>δημοτικού</s> <b>ΔΗΜΟΤΙΚΟΥ ΚΑΙ ΝΗΠΙΑΓΩΓΕΙΟΥ</b> για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα
                         </p>
                     </div>
 
@@ -117,7 +117,7 @@
                     </div>
                     <div>
                         <br/>
-                        <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.1</a>
+                        <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.2</a>
                     </div>
 
                 </div>
@@ -151,7 +151,8 @@
             <div class="row" style="padding-top:20px;">
                 <div class="col-sm-12">
                     <div class="alert alert-danger" role="alert">
-                        ΣΗΜΑΝΤΙΚΟ! Χρειαζόμαστε τις ιδέες σου. Πάτα <a href="{{ route('logo') }}">εδώ</a> για να δεις
+                        ΣΗΜΑΝΤΙΚΟ! Χρειαζόμαστε τις ιδέες σου. Πάτα <a href="{{ route('logo') }}" class="btn btn-info btn-sm">εδώ</a> για να δεις<br/>
+                        ή δες <a href="{{ route('students') }}" class="btn btn-info btn-sm">εδώ</a> τις ιδέες των παιδιών για το Γριφομπότ
                     </div>
                 </div>
             </div>

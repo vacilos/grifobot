@@ -55,13 +55,24 @@ class UserController extends Controller
             ->where('users.level', '=', $level)
             ->groupBy('users.name')
             ->orderBy('totalScore', 'desc')
-            ->take(10)
+            ->take(5)
+            ->get();
+
+        $dateTime7 = new \DateTime('-7 days');
+        $compareDate7 = $dateTime7->format("Y-m-d H:i:s");
+        $stats7 = Score::selectRaw('sum(score) as totalScore, users.name as username')
+            ->join('users', 'users.id', '=', 'scores.user_id')
+            ->where('scores.updated_at', '>', $compareDate7)
+            ->where('users.level', '=', $level)
+            ->groupBy('users.name')
+            ->orderBy('totalScore', 'desc')
+            ->take(5)
             ->get();
 
         // otherscores
         $otherscores = Score::where('user_id', '!=', $user->id)->join('plans', 'plans.id','=','scores.plan_id')->where('plans.level',$user->level)->orderby('plans.updated_at', 'desc')->take(6)->get();
 
-        return view('home', compact('total', 'count', 'scores', 'otherscores', 'hasBadge', 'stats'));
+        return view('home', compact('total', 'count', 'scores', 'otherscores', 'hasBadge', 'stats', 'stats7'));
     }
     /**
      * Show the application dashboard.
@@ -107,9 +118,21 @@ class UserController extends Controller
             ->where('users.level', '=', $level)
             ->groupBy('users.name')
             ->orderBy('totalScore', 'desc')
+            ->take(50)
             ->get();
 
-        return view('user.stats', compact('stats'));
+        $dateTime7 = new \DateTime('-7 days');
+        $compareDate7 = $dateTime7->format("Y-m-d H:i:s");
+        $stats7 = Score::selectRaw('sum(score) as totalScore, users.name as username')
+            ->join('users', 'users.id', '=', 'scores.user_id')
+            ->where('scores.updated_at', '>', $compareDate7)
+            ->where('users.level', '=', $level)
+            ->groupBy('users.name')
+            ->orderBy('totalScore', 'desc')
+            ->take(50)
+            ->get();
+
+        return view('user.stats', compact('stats', 'stats7'));
     }
     /**
      * Show the application dashboard.

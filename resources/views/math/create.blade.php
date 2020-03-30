@@ -41,6 +41,28 @@
                         <input type="text" name="mathanswer" class="form-control" id="mathanswer" aria-describedby="mathanswerhelp" placeholder="Απάντηση της άσκησης π.χ. 8">
                         <small id="mathanswerhelp" class="form-text text-muted">Καταγράψτε την απάντηση της άσκησης.</small>
                     </div>
+                    <hr/>
+                    <h5>Για περιπτώσεις ερωτήσεων πολλαπλής επιλογής συμπληρώστε τουλάχιστον ένα από τα ακόλουθα</h5>
+                    <div class="form-group">
+                        <label for="mathanswer_alt1">Εναλλακτική Απάντηση 1</label>
+                        <input type="text" name="mathanswer_alt1" class="form-control" id="mathanswer_alt1" aria-describedby="mathanswer_alt1help" placeholder="Εναλλατική απάντηση της άσκησης π.χ. 12">
+                        <small id="mathanswer_alt1help" class="form-text text-muted">Σε περιπτώσεις πολλαπλής επιλογής γράφετε μία "λάθος" απάντηση.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="mathanswer_alt2">Εναλλακτική Απάντηση 2</label>
+                        <input type="text" name="mathanswer_alt2" class="form-control" id="mathanswer_alt2" aria-describedby="mathanswer_alt2help" placeholder="Εναλλατική απάντηση της άσκησης π.χ. 20">
+                        <small id="mathanswer_alt2help" class="form-text text-muted">Σε περιπτώσεις πολλαπλής επιλογής γράφετε μία "λάθος" απάντηση.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="mathanswer_alt3">Εναλλακτική Απάντηση 3</label>
+                        <input type="text" name="mathanswer_alt3" class="form-control" id="mathanswer_alt3" aria-describedby="mathanswer_alt3help" placeholder="Εναλλατική απάντηση της άσκησης π.χ. 22">
+                        <small id="mathanswer_alt3help" class="form-text text-muted">Σε περιπτώσεις πολλαπλής επιλογής γράφετε μία "λάθος" απάντηση.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="mathanswer_alt4">Εναλλακτική Απάντηση 4</label>
+                        <input type="text" name="mathanswer_alt4" class="form-control" id="mathanswer_alt4" aria-describedby="mathanswer_alt4help" placeholder="Εναλλατική απάντηση της άσκησης π.χ. 6">
+                        <small id="mathanswer_alt4help" class="form-text text-muted">Σε περιπτώσεις πολλαπλής επιλογής γράφετε μία "λάθος" απάντηση.</small>
+                    </div>
                     <div class="form-group">
                         <label for="mathlevel">Επίπεδο</label>
                         <select name="mathlevel" id="mathlevel" size="1" aria-describedby="mathlevelhelp" class="form-control">

@@ -105,6 +105,10 @@ class MathController extends Controller
         $math->level = $request->mathlevel;
         $math->question = $request->mathquestion;
         $math->answer = $request->mathanswer;
+        $math->answer_alt1 = $request->mathanswer_alt1!=null?$request->mathanswer_alt1:null;
+        $math->answer_alt2 = $request->mathanswer_alt2!=null?$request->mathanswer_alt2:null;
+        $math->answer_alt3 = $request->mathanswer_alt3!=null?$request->mathanswer_alt3:null;
+        $math->answer_alt4 = $request->mathanswer_alt4!=null?$request->mathanswer_alt4:null;
         $math->category_id = $request->category;
         $math->creator_user_id = $user->id;
         $math->updater_user_id = $user->id;
@@ -159,6 +163,10 @@ class MathController extends Controller
         $math->level = $request->mathlevel;
         $math->question = $request->mathquestion;
         $math->answer = $request->mathanswer;
+        $math->answer_alt1 = $request->mathanswer_alt1!=null?$request->mathanswer_alt1:null;
+        $math->answer_alt2 = $request->mathanswer_alt2!=null?$request->mathanswer_alt2:null;
+        $math->answer_alt3 = $request->mathanswer_alt3!=null?$request->mathanswer_alt3:null;
+        $math->answer_alt4 = $request->mathanswer_alt4!=null?$request->mathanswer_alt4:null;
         $math->category_id = $request->category;
         $math->updater_user_id = $user->id;
         $math->save();
@@ -187,8 +195,26 @@ class MathController extends Controller
 
         $math->question = fix_equation($math->question);
         $math->answer = fix_equation($math->answer);
+        $wrong = array();
+        if($math->answer_alt1 != null) {
+            $wrong[] = $math->answer_alt1;
+        }
+        if($math->answer_alt2 != null) {
+            $wrong[] = $math->answer_alt2;
+        }
+        if($math->answer_alt3 != null) {
+            $wrong[] = $math->answer_alt3;
+        }
+        if($math->answer_alt4 != null) {
+            $wrong[] = $math->answer_alt4;
+        }
 
-        return response()->json(['question'=>$math->question, 'id'=>$math->id, 'answer' => $math->answer]);
+        if(sizeof($wrong) > 0) {
+            $wrong[] = $math->answer;
+        }
+        shuffle($wrong);
+
+        return response()->json(['question'=>$math->question, 'id'=>$math->id, 'answer' => $math->answer, 'wrong' => $wrong]);
     }
     /**
      * ajax call to fetch math id data

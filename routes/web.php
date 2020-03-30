@@ -38,6 +38,10 @@ Route::get('/logo', function () {
     return view('logo');
 })->name('logo');
 
+Route::get('/students', function () {
+    return view('students');
+})->name('students');
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
@@ -62,7 +66,9 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
     Route::get('/changeprofile', 'UserController@changeProfile')->name('user_change_profile');
     Route::patch('/updateprofile', 'UserController@updateProfile')->name('user_update_profile');
     Route::get('/{plan}/play/', 'PlanController@play')->name('play_plan');
+    Route::get('/{plan}/play/kinder', 'PlanController@playKinder')->name('play_plan_kinder');
     Route::get('/plan/{size}/{level}/start/', 'PlanController@startPlan')->name('start_plan');
+    Route::get('/plan/{size}/{level}/{diff}/start/kinder', 'PlanController@startPlanKinder')->name('start_plan_kinder');
     Route::post('/maths/question', 'MathController@question')->name('mathquestion');
     Route::post('/score/record', 'ScoreController@recordScore')->name('user_score');
     Route::post('/maths/question/preview', 'MathController@previewQuestion')->name('preview_question');

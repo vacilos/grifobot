@@ -17,7 +17,13 @@
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col text-center">
-                            <a href="{{ route('start_plan', ['size'=> 6, 'level' => Auth::user()->level]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ ΤΩΡΑ</a>
+                            @if(Auth::user()->level == 7)
+                                <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 1]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ απλό</a>
+                                <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 2]) }}" class="btn btn-warning btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ μέτριο</a>
+                                <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 3]) }}" class="btn btn-danger btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ δύσκολο</a>
+                            @else
+                                <a href="{{ route('start_plan', ['size'=> 6, 'level' => Auth::user()->level]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ ΤΩΡΑ</a>
+                            @endif
                             <hr/>
                             Έχεις παίξει <b>{{$count}}</b> παιχνίδια και έχεις συγκεντρώσει <b>{{$total}}</b> πόντους
                             <hr/>
@@ -88,18 +94,50 @@
         </div>
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-header"><h3>Top10</h3></div>
+                <div class="card-header"><h3>Top5 / 24h</h3></div>
 
                 <div class="card-body">
                     <div>
                         <table class="table table-bordered table-striped table-sm">
                             <thead>
                             <tr>
-                                <th colspan="3">24 ωρών στην {{ Auth::user()->showSMG() }}</th>
+                                <th colspan="3">24 ωρών στο επίπεδο {{ Auth::user()->showSMG() }}</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($stats as $stat)
+                                <tr @if(Auth::user()->name == $stat->username)class="table-success"@endif>
+                                    <td>
+                                        {{$loop->index+1}}
+                                    </td>
+                                    <td>
+                                        {{$stat->username}}
+                                    </td>
+                                    <td>
+                                        {{number_format($stat->totalScore, 0, ',','.')}}
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                        <a href="{{ route('user_stats') }}" class="btn btn-sm btn-info">Όλη η κατάταξη</a>
+                    </div>
+                </div>
+            </div>
+            <hr/>
+            <div class="card">
+                <div class="card-header"><h3>Top5 / 7d</h3></div>
+
+                <div class="card-body">
+                    <div>
+                        <table class="table table-bordered table-striped table-sm">
+                            <thead>
+                            <tr>
+                                <th colspan="3">7 ημερών στο επίπεδο {{ Auth::user()->showSMG() }}</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($stats7 as $stat)
                                 <tr @if(Auth::user()->name == $stat->username)class="table-success"@endif>
                                     <td>
                                         {{$loop->index+1}}

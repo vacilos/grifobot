@@ -17,3 +17,7 @@ create table `badges` (`id` bigint unsigned not null auto_increment primary key,
 create table `users_badges` (`id` bigint unsigned not null auto_increment primary key, `user_id` bigint unsigned not null, `badge_id` bigint unsigned not null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci';
 alter table `users_badges` add constraint `users_badges_user_id_foreign` foreign key (`user_id`) references `users` (`id`);
 alter table `users_badges` add constraint `users_badges_badge_id_foreign` foreign key (`badge_id`) references `badges` (`id`);
+
+
+--update 30.3.2020
+alter table `maths` add `answer_alt1` varchar(255) null, add `answer_alt2` varchar(255) null, add `answer_alt3` varchar(255) null, add `answer_alt4` varchar(255) null

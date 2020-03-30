@@ -117,6 +117,9 @@
                                 <a class="nav-link" href="{{ route('help') }}">Οδηγίες</a>
                             </li>
                             <li class="nav-item">
+                                <a class="nav-link" href="{{ route('students') }}">Παιδιά και Γριφομπότ</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('contact') }}">Επικοινωνία</a>
                             </li>
                 @endguest
@@ -175,6 +178,8 @@
                 <br/>additional graphics designed by <a href="https://www.facebook.com/aggelakosPnM/" target="_blank">Yannis Aggelakos</a><br/>
                 Images for animal avatars by freepik (<a href="http://www.freepik.com">Designed by Freepik</a>)<br/>
                 tech support by <a href="http://osporos.com">O Sporos</a>
+                <br/>
+                @yield('footer')
             </small>
             <br/>
             <div class="float-right" id="footer_msg" style="font-size: 5px;"></div>

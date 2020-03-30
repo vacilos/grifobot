@@ -31,6 +31,7 @@
                             <option value="4" @if(Auth::user()->level == 4) selected @endif>Δ' Δημοτικού</option>
                             <option value="5" @if(Auth::user()->level == 5) selected @endif>Ε' Δημοτικού</option>
                             <option value="6" @if(Auth::user()->level == 6) selected @endif>ΣΤ' Δημοτικού</option>
+                            <option value="7" @if(Auth::user()->level == 7) selected @endif>Νηπιαγωγείο</option>
 {{--                            <option value="7" @if(Auth::user()->level == 7) selected @endif>Α' Γυμνασίου</option>--}}
 {{--                            <option value="8" @if(Auth::user()->level == 8) selected @endif>Β' Γυμνασίου</option>--}}
 {{--                            <option value="9" @if(Auth::user()->level == 9) selected @endif>Γ' Γυμνασίου</option>--}}

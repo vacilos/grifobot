@@ -57,7 +57,14 @@
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col text-center">
-                            <a href="{{ route('start_plan', ['size'=> 6, 'level' => Auth::user()->level]) }}" class="btn btn-success btn-lg btn-block">ΠΑΙΞΕ ΤΩΡΑ</a>
+                            @if(Auth::user()->level == 7)
+                                <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 1]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ απλό</a>
+                                <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 2]) }}" class="btn btn-warning btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ μέτριο</a>
+                                <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 3]) }}" class="btn btn-danger btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ δύσκολο</a>
+                            @else
+                                <a href="{{ route('start_plan', ['size'=> 6, 'level' => Auth::user()->level]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ ΤΩΡΑ</a>
+                            @endif
+                            <hr/>
                             Έχεις παίξει <b>{{$count}}</b> παιχνίδια και έχεις συγκεντρώσει <b>{{$total}}</b> πόντους
                             <br/>
                             <img src="{{asset('images')}}/{{ Auth::user()->avatar }}" class="img-fluid" />

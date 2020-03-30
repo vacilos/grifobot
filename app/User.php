@@ -63,16 +63,9 @@ class User extends Authenticatable
         }
 
         if($this->level == 7) {
-            return "Α' Γυμνασίού";
+            return "Νηπιαγωγείο";
         }
 
-        if($this->level == 8) {
-            return "Β' Γυμνασίου";
-        }
-
-        if($this->level == 9) {
-            return "Γ' Γυμνασίου";
-        }
     }
 
     public function municipality() {
