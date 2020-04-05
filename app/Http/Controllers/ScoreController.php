@@ -111,7 +111,7 @@ class ScoreController extends Controller
             $existingScore->total = 0;
         }
 
-        if($score > 800 || $score < 0) {
+        if($score > 900 || $score < 0) {
             return response()->json(['answer' => "Προσπάθεια κλοπής"]);
         }
         $existingScore->score = $score;

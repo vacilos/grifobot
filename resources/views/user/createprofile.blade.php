@@ -46,6 +46,19 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="newsletter"><b>Ενημέρωση</b></label>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="newsletter" name="newsletter" value="1">
+                                    <label class="form-check-label" for="newsletter">
+                                        Πατήστε αν μας επιτρέπετε να σας στέλνουμε e-mail σχετικά με τις εκδόσεις του Γριφομπότ, τα τουρνουά που γίνονται και τα challenges που σας κάνουν άλλοι μαθητές.
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label for="avatar">Avatar</label>
                         <div class="row">
                             <div class="col-sm-2">

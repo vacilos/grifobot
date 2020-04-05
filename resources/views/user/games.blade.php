@@ -3,12 +3,14 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-sm-8">
+        <div class="col-sm-12">
             <div class="card">
-                <div class="card-header">Παιχνίδια</div>
-
+                <div class="card-header"><h4>Παιχνίδια</h4></div>
+                <div id="messagespace"></div>
                 <div class="card-body">
-                    <table class="table table-bordered table-striped">
+                    <button class="btn btn-info btn-sm" onclick="javascript:history.go(-1);"><i class="fa fa-chevron-left"></i> Πίσω</button>
+
+                    <table class="table table-bordered table-striped table-responsive-sm">
                         <thead>
                         <tr>
                             <th>
@@ -40,6 +42,8 @@
                                 </td>
                                 <td>
                                     <a href="{{ route("play_plan", ['plan'=> $game->plan_id]) }}" class="btn btn-sm btn-info">Παίξε πάλι</a>
+                                    <a href="{{ route("plan_details", ['plan'=> $game->plan_id]) }}" class="btn btn-sm btn-warning">Σκόρ άλλων</a>
+                                    <button onclick="javascript:openChallenge({{$game->plan_id}});" class="btn btn-danger btn-sm">Κάνε CHALLENGE</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -50,38 +54,73 @@
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-header"><h3>{{ Auth::user()->name }} <a href="{{ route("user_change_profile") }}" class="btn btn-sm btn-info">Αλλαγή προφίλ</a></h3> </div>
+    </div>
+</div>
 
-                <div class="card-body">
-                    <div class="row justify-content-center">
-                        <div class="col text-center">
-                            @if(Auth::user()->level == 7)
-                                <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 1]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ απλό</a>
-                                <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 2]) }}" class="btn btn-warning btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ μέτριο</a>
-                                <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 3]) }}" class="btn btn-danger btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ δύσκολο</a>
-                            @else
-                                <a href="{{ route('start_plan', ['size'=> 6, 'level' => Auth::user()->level]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ ΤΩΡΑ</a>
-                            @endif
-                            <hr/>
-                            Έχεις παίξει <b>{{$count}}</b> παιχνίδια και έχεις συγκεντρώσει <b>{{$total}}</b> πόντους
-                            <br/>
-                            <img src="{{asset('images')}}/{{ Auth::user()->avatar }}" class="img-fluid" />
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col text-center">
-                            {{ Auth::user()->showSMG() }}
-                            <Br/>
-                            @if (Auth::user()->municipality)
-                                {{ Auth::user()->municipality }}
-                            @endif
-                        </div>
-                    </div>
+<div class="modal fade" id="challengeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Challenge</h5>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Ζήτησε από ένα φίλο ή φίλη σου να σου δώσει το ψευδώνυμο ή το email που χρησιμοποιεί στο Γριφομπότ για να του κάνεις challenge.<br/>
+                    Όταν ο φίλος ή η φίλη σου συνδεθεί στο σύστημα θα δει ένα μήνυμα πρόσκλησης να παίξει αυτό το επίπεδο.
+                    Με αυτό τον τρόπο μπορείτε να δείτε ο καθένας τους πόντους του άλλου στο ίδιο επίπεδο. Μην ξεχάσετε να του πείτε ότι στείλατε το μήνυμα ;)
+                </p>
+                <div>
+                    <input id="challenge" name="challenge" type="text" class="form-control" style="font-size:30px;" placeholder="Ψευδώνυμο ή email του φίλου ή της φίλης" autocomplete="off"/>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="modalbutton" onclick="javascript:submitChallenge();">CHALLENGE!</button>
             </div>
         </div>
     </div>
 </div>
+@endsection
+
+@section('javascript')
+    <script type="text/javascript">
+
+        var globalPlan = 0;
+        function openChallenge(plan) {
+            globalPlan = plan;
+            $('#challengeModal').modal('show');
+        }
+
+
+        function submitChallenge() {
+            $('#challengeModal').modal('hide');
+            var friend_name = $('#challenge').val();
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '<?php echo e(csrf_token()); ?>'
+                }
+            });
+            $.ajax({
+                type:'POST',
+                url:'<?php echo e(route('challenge_friend')); ?>',
+                data:
+                    {
+                        plan: globalPlan,
+                        username: friend_name
+                    },
+                success:function(data) {
+                    if(data.code == -1) {
+                        $("#messagespace").html('<div class="alert alert-danger alert-dismissible fade show">  <button type="button" class="close" data-dismiss="alert">&times;</button>'+data.answer+'</div>');
+                    } else {
+                        $("#messagespace").html('<div class="alert alert-success alert-dismissible fade show">  <button type="button" class="close" data-dismiss="alert">&times;</button>'+data.answer+'</div>');
+                    }
+
+                },
+                error:function(data) {
+                    console.log(data)
+                }
+            });
+        }
+
+    </script>
 @endsection

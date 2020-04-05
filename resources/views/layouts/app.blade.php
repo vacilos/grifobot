@@ -17,7 +17,20 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Γριφομπότ by ΓΑΒ LAB</title>
+    <meta property="description" content="Παιχνίδι για μαθητές Δημοτικού και Νηπιαγωγείου για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα"/>
+    <meta property="keywords" content="εκπαιδευτικό παιχνίδι, δημοτικό, παιχνίδι, ερωτήσεις, μαθηματικά, γλώσσα, ΓΑΒ LAB, Γριφομπότ, online παιχνίδι"/>
+    <meta name="author" content="Ερευνητικό Εργαστήριο Γνώσης και Αβεβαιότητας - ΓΑΒ LAB">
+    <meta property="og:title" content="Γριφομπότ by ΓΑΒ LAB">
+    <meta property="og:description" content="Παιχνίδι για μαθητές Δημοτικού και Νηπιαγωγείου για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα">
+    <meta property="og:url" content="http://grifobot.gr"/>
+    <meta property="og:image" content="{{asset('images/logo.png')}}"/>
+    <meta property="fb:app_id" content="713822995484844"/>
+    <meta name=”twitter:title” content=”White Γριφομπότ by ΓΑΒ LAB”>
+    <meta name=”twitter:description” content=”Παιχνίδι για μαθητές Δημοτικού και Νηπιαγωγείου για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα.”>
+    <meta name=”twitter:image” content=”http://grifobot.gr”>
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
+
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -70,7 +83,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    Γριφο<span style="color:deeppink">μπότ</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -110,17 +123,17 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('user_home') }}">Αρχική</a>
                             </li>
-                            <li class="nav-item">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Γριφομπότ</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown02">
                                 <a class="nav-link" href="{{ route('about') }}">Τι είναι</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('help') }}">Οδηγίες</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('students') }}">Παιδιά και Γριφομπότ</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('contact') }}">Επικοινωνία</a>
+                            </div>
+                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="https://www.facebook.com/grifobot" target="_blank" style="color: blue;"><i class="fa fa-facebook-official"></i> Γριφομπότ@Facebook</a>
                             </li>
                 @endguest
                     </ul>
@@ -174,7 +187,7 @@
             Application designed with <i class="fa fa-heart" style="color: red;"></i> by <a href="http://gav.uop.gr"><img src="{{ asset('images/gav.png') }}" style="max-width:20px;">ΓΑΒ LAB</a><br/>
 
             <small>
-                <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.1</a> | <a href="{{route('contact')}}">Επικοινωνία</a>
+                <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.3 (deeppink)</a> | <a href="{{route('contact')}}">Επικοινωνία</a>
                 <br/>additional graphics designed by <a href="https://www.facebook.com/aggelakosPnM/" target="_blank">Yannis Aggelakos</a><br/>
                 Images for animal avatars by freepik (<a href="http://www.freepik.com">Designed by Freepik</a>)<br/>
                 tech support by <a href="http://osporos.com">O Sporos</a>

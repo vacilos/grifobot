@@ -13,7 +13,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Γριφομπότ</title>
+    <title>Γριφομπότ by ΓΑΒ LAB</title>
+    <meta property="description" content="Παιχνίδι για μαθητές Δημοτικού και Νηπιαγωγείου για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα"/>
+    <meta property="keywords" content="εκπαιδευτικό παιχνίδι, δημοτικό, παιχνίδι, ερωτήσεις, μαθηματικά, γλώσσα, ΓΑΒ LAB, Γριφομπότ, online παιχνίδι"/>
+    <meta name="author" content="Ερευνητικό Εργαστήριο Γνώσης και Αβεβαιότητας - ΓΑΒ LAB">
+    <meta property="og:title" content="Γριφομπότ by ΓΑΒ LAB">
+    <meta property="og:description" content="Παιχνίδι για μαθητές Δημοτικού και Νηπιαγωγείου για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα">
+    <meta property="og:url" content="http://grifobot.gr"/>
+    <meta property="og:image" content="{{asset('images/logo.png')}}"/>
+    <meta property="fb:app_id" content="713822995484844"/>
+
+    <meta name=”twitter:title” content=”White Γριφομπότ by ΓΑΒ LAB”>
+    <meta name=”twitter:description” content=”Παιχνίδι για μαθητές Δημοτικού και Νηπιαγωγείου για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα.”>
+    <meta name=”twitter:image” content=”http://grifobot.gr”>
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
@@ -30,13 +43,9 @@
             color: #636b6f;
             font-family: 'Nunito', sans-serif;
             font-weight: 200;
-            height: 100vh;
             margin: 0;
         }
 
-        .full-height {
-            height: 80vh;
-        }
 
         .flex-center {
             align-items: center;
@@ -78,7 +87,10 @@
         }
     </style>
     <link rel="stylesheet" href="{{ asset('fa/css/font-awesome.min.css') }}">
+
 </head>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/el_GR/sdk.js#xfbml=1&autoLogAppEvents=1&version=v6.0&appId=713822995484844"></script>
 <body>
 <div>
     @if (Route::has('login'))
@@ -98,36 +110,37 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-8">
-                    <div class="title m-b-md">
-                        Γριφο<span style="color: cyan;">μπότ</span> <span style="font-size: 11px;">έκδοση 1.2</span>
+                <div class="col-sm-12">
+                    <div class="title">
+                        Γριφο<span style="color: deeppink;">μπότ</span> <span style="font-size: 11px;">έκδοση 1.3</span>
+                    </div>
+                    <div>
+                        <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.3</a>
                     </div>
                     <div>
                         <p>
-                            Παιχνίδι για μαθητές <s>δημοτικού</s> <b>ΔΗΜΟΤΙΚΟΥ ΚΑΙ ΝΗΠΙΑΓΩΓΕΙΟΥ</b> για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα
+                            Παιχνίδι για μαθητές <b>ΔΗΜΟΤΙΚΟΥ ΚΑΙ ΝΗΠΙΑΓΩΓΕΙΟΥ</b> για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα
                         </p>
                     </div>
 
                     <h5>
                         Μέχρι σήμερα έχουν παιχτεί <b style="color:red;">{{ number_format($count, 0, ',','.') }}</b> παιχνίδια, έχουν απαντηθεί σωστά <b style="color: green">{{ number_format($answers, 0, ',','.') }}</b> ασκήσεις, έχουν γίνει <b style="color: blue;">{{ number_format($moves, 0, ',','.') }}</b> κινήσεις με συνολικό σκορ <b style="color: magenta">{{ number_format($total, 0, ',','.') }}</b>.
                     </h5>
-
-                    <div>
+                    <div class="m-b-md">
                         <a href="{{route('user_home')}}" class="btn btn-lg btn-success">ΠΑΙΞΕ ΤΩΡΑ</a>
                     </div>
-                    <div>
-                        <br/>
-                        <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.2</a>
-                    </div>
 
+                    <div class="fb-like m-b-md" data-href="https://facebook.com/grifobot" data-width="480" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-sm-4">
                     <table class="table table-striped table-bordered table-sm">
                         <thead>
                         <tr>
                             <td colspan="3">
                                 <h3>
-                                    Top10 <small class="text-muted">(24ωρών)</small>
+                                    Top 10 <small class="text-muted">(24ωρών)</small>
                                 </h3>
                             </td>
                         </tr>
@@ -137,8 +150,8 @@
                                 <td>
                                     {{$loop->index+1}}
                                 </td>
-                                <td>
-                                    {{$stat->username}}
+                                <td class="text-left">
+                                    <img src="{{asset('images')}}/{{$stat->avatar}}" class="img-fluid" style="max-width:20px;"/>&nbsp; {{$stat->username}}
                                 </td>
                                 <td>
                                     {{number_format($stat->totalScore, 0, ',','.')}}
@@ -147,15 +160,98 @@
                         @endforeach
                     </table>
                 </div>
-            </div>
-            <div class="row" style="padding-top:20px;">
-                <div class="col-sm-12">
-                    <div class="alert alert-danger" role="alert">
-                        ΣΗΜΑΝΤΙΚΟ! Χρειαζόμαστε τις ιδέες σου. Πάτα <a href="{{ route('logo') }}" class="btn btn-info btn-sm">εδώ</a> για να δεις<br/>
-                        ή δες <a href="{{ route('students') }}" class="btn btn-info btn-sm">εδώ</a> τις ιδέες των παιδιών για το Γριφομπότ
-                    </div>
+                <div class="col-sm-4">
+                    <table class="table table-striped table-bordered table-sm">
+                        <thead>
+                        <tr>
+                            <td colspan="3">
+                                <h3>
+                                    Top 10 <small class="text-muted">(7 ημερών)</small>
+                                </h3>
+                            </td>
+                        </tr>
+                        </thead>
+                        @foreach($stats7 as $stat)
+                            <tr>
+                                <td>
+                                    {{$loop->index+1}}
+                                </td>
+                                <td class="text-left">
+                                    <img src="{{asset('images')}}/{{$stat->avatar}}" class="img-fluid" style="max-width:20px;"/>&nbsp; {{$stat->username}}
+                                </td>
+                                <td>
+                                    {{number_format($stat->totalScore, 0, ',','.')}}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
                 </div>
+                <div class="col-sm-4">
+                    <table class="table table-striped table-bordered table-sm">
+                        <thead>
+                        <tr>
+                            <td colspan="3">
+                                <h3>
+                                    Hall of Fame
+                                </h3>
+                            </td>
+                        </tr>
+                        </thead>
+                        @foreach($hof as $stat)
+                            <tr>
+                                <td>
+                                    {{$loop->index+1}}
+                                </td>
+                                <td class="text-left">
+                                    <img src="{{asset('images')}}/{{$stat->avatar}}" class="img-fluid" style="max-width:20px;"/>&nbsp; {{$stat->username}}
+                                </td>
+                                <td>
+                                    {{number_format($stat->totalScore, 0, ',','.')}}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+                <div class="col-sm-12">
+                    <table class="table table-striped table-bordered table-sm">
+                        <thead>
+                        <tr>
+                            <td colspan="4">
+                                <h3>
+                                    Top 10 Δήμοι
+                                </h3>
+                            </td>
+                        </tr>
+                        </thead>
+                        @foreach($municipalStats as $stat)
+                            <tr>
+                                <td>
+                                    {{$loop->index+1}}
+                                </td>
+                                <td>
+                                    Δήμος {{ $stat->dimos }}
+                                </td>
+                                <td>
+                                    {{$stat->totalUsers}} μαθητές
+                                </td>
+                                <td>
+                                    {{number_format($stat->totalScore, 0, ',','.')}} πόντοι
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+
             </div>
+
+{{--            <div class="row" style="padding-top:20px;">--}}
+{{--                <div class="col-sm-12">--}}
+{{--                    <div class="alert alert-danger" role="alert">--}}
+{{--                        ΣΗΜΑΝΤΙΚΟ! Χρειαζόμαστε τις ιδέες σου. Πάτα <a href="{{ route('logo') }}" class="btn btn-info btn-sm">εδώ</a> για να δεις<br/>--}}
+{{--                        ή δες <a href="{{ route('students') }}" class="btn btn-info btn-sm">εδώ</a> τις ιδέες των παιδιών για το Γριφομπότ--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
             <div class="row">
                 <div class="col-sm-12">
                     <div style="font-size:18px;">

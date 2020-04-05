@@ -39,17 +39,13 @@
         .grid b img {
             max-width: calc(5vw);
         }
-
-        #answer {
-            height: calc(2.19rem + 20px);
-        }
     </style>
 @endsection
 @section('content')
     <div class=" container-fluid">
         <div class="row justify-content-center">
             <div class="col-8">
-                <h3>Πίνακας #{{ $plan->id }} <small>Λύσε με τις λιγότερες κινήσεις</small></h3>
+                <h3>Τουρνουά #{{ $tournament->id }} - {{ $tournament->name }} | Παιχνίδι {{ $game }}/6</h3>
                 <main class="grid">
                     @foreach($pattern as $pat)
                         <b id="pos{{$pat->id}}" @if($pat->blocked == true)style="background-color: black;"@endif>
@@ -77,34 +73,6 @@
 
                     <hr style="clear:both;"/>
                     <h4>ΣΚΟΡ: <span id="score">0</span></h4>
-                    <hr/>
-                    <h4>Σκορ μαθητών</h4>
-                    <div id="challengemessage2"></div>
-
-                    <table class="table table-responsive table-sm table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Μαθητής</th>
-                            <th>Σκορ/Κινήσεις</th>
-                            <th>Ενέργειες</th>
-                        </tr>
-                        </thead>
-                        @foreach($scores as $score)
-                            <tr @if($score->user->id == Auth::user()->id) class="table-success" @endif >
-                                <td>
-                                    {{ $score->user->name }}
-                                </td>
-                                <td>
-                                    {{number_format($score->score, 0, ',','.')}} / {{ $score->movements }}
-                                </td>
-                                <td>
-                                    @if($score->user->id != Auth::user()->id)
-                                    <button class="btn btn-sm btn-danger" onclick="javascript:openChallenge('{{ $score->user->name  }}')">Κάνε Challenge</button>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
                 </div>
             </div>
         </div>
@@ -160,21 +128,22 @@
                         <div class="col-sm-12 text-center">
                             <h1>ΜΠΡΑΒΟ</h1>
                             <br/><br/>
-                            <div id="challengemessage"></div>
+                            <h4>Ολοκλήρωσες το παιχνίδι {{ $game }} από 6 του τουρνουά</h4>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-sm-12 text-center">
-                            <p>Τελικό σκορ: <span id="endGameScore"></span></p>
+                            <p>Σκόρ πίνακα: <span id="endGameScore"></span></p>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button onclick="javascript:openChallenge();" class="btn btn-danger float-left">Κάνε CHALLENGE</button>
-                    <a href="{{ route('start_plan_ex', ['size'=> 6, 'level' => Auth::user()->level]) }}" class="btn btn-success">Παίξε νέο</a>
-                    <a href="{{ route('play_plan', ['plan'=> $plan->id]) }}" class="btn btn-warning">Παίξε το ίδιο</a>
-                    <a href="{{ route('user_home') }}" class="btn btn-warning">Αρχική</a>
+                    @if($game < 6)
+                    <a href="{{ route('play_tournament', ['tournament'=> $tournament, 'game' => $game+1]) }}" class="btn btn-success">Επόμενο</a>
+                    @else
+                        <a href="{{ route('finish_tournament', ['tournament'=> $tournament]) }}" class="btn btn-success">ΤΕΛΟΣ</a>
+                    @endif
+
                 </div>
             </div>
         </div>
@@ -199,29 +168,6 @@
         </div>
     </div>
 
-    <div class="modal fade" id="challengeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Challenge</h5>
-                </div>
-                <div class="modal-body">
-                    <p>
-                        Ζήτησε από ένα φίλο ή φίλη σου να σου δώσει το ψευδώνυμο ή το email που χρησιμοποιεί στο Γριφομπότ για να του κάνεις challenge.<br/>
-                        Όταν ο φίλος ή η φίλη σου συνδεθεί στο σύστημα θα δει ένα μήνυμα πρόσκλησης να παίξει αυτό το επίπεδο. <br/>
-                        Με αυτό τον τρόπο μπορείτε να δείτε ο καθένας τους πόντους του άλλου στο ίδιο επίπεδο. Μην ξεχάσετε να του πείτε ότι στείλατε το μήνυμα ;)
-                    </p>
-                    <div>
-                        <input id="challenge" name="challenge" type="text" class="form-control" style="font-size:30px;" placeholder="Ψευδώνυμο ή email του φίλου ή της φίλης" autocomplete="off"/>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="modalbutton" onclick="javascript:submitChallenge();">CHALLENGE!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -239,6 +185,7 @@
             </div>
         </div>
     </div>
+
     <div class="modal fade" id="correctPlaceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -375,7 +322,6 @@
 
         }
 
-
         function clearMoves() {
             $('#moves').empty();
             move = 1;
@@ -495,6 +441,7 @@
                     // OPEN modal
                     currentAnswer = data.answer;
                     var wrong = data.wrong;
+                    console.log(wrong);
                     if(wrong.length > 0) {
                         //create buttons
                         var buttoncode = "<h5>Διάλεξε τη σωστή απάντηση</h5>";
@@ -532,13 +479,15 @@
             });
             $.ajax({
                 type:'POST',
-                url:'{{ route('user_score') }}',
+                url:'{{ route('user_score_tournament') }}',
                 data:
                     {
                         score: score,
                         plan: plan,
                         userId: userId,
-                        movements: movements
+                        movements: movements,
+                        tournament: {{ $tournament->id }},
+                        game: {{ $game }}
                     },
                 success:function(data) {
                     $("#footer_msg").html(data.answer);
@@ -548,39 +497,6 @@
                 }
             });
 
-        }
-
-        function submitChallenge() {
-            $('#challengeModal').modal('hide');
-            var friend_name = $('#challenge').val();
-            $('#challenge').val("");
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            });
-            $.ajax({
-                type:'POST',
-                url:'{{ route('challenge_friend') }}',
-                data:
-                    {
-                        plan: {{ $plan->id }},
-                        username: friend_name
-                    },
-                success:function(data) {
-                    $("#footer_msg").html(data.answer);
-                    if (data.code == -1) {
-                        $("#challengemessage").html('<div class="alert alert-danger alert-dismissible fade show">  <button type="button" class="close" data-dismiss="alert">&times;</button>' + data.answer + '</div>');
-                        $("#challengemessage2").html('<div class="alert alert-danger alert-dismissible fade show">  <button type="button" class="close" data-dismiss="alert">&times;</button>' + data.answer + '</div>');
-                    } else {
-                        $("#challengemessage").html('<div class="alert alert-success alert-dismissible fade show">  <button type="button" class="close" data-dismiss="alert">&times;</button>' + data.answer + '</div>');
-                        $("#challengemessage2").html('<div class="alert alert-success alert-dismissible fade show">  <button type="button" class="close" data-dismiss="alert">&times;</button>' + data.answer + '</div>');
-                    }
-                },
-                error:function(data) {
-                    console.log(data)
-                }
-            });
         }
 
         function submitModal(i = null) {
@@ -630,9 +546,9 @@
         }
 
         function checkEndGame() {
-
+            console.log('checking end');
             if(completedQuestions == totalQuestions) {
-
+                console.log('checking end');
                 $("#failModal").on('hidden.bs.modal', function(e) {
                     $("#endGameScore").html(score);
                     $('#endGameModal').modal({
@@ -656,13 +572,6 @@
                 });
 
             }
-        }
-
-        function openChallenge(fixedname = null) {
-            if(fixedname != null) {
-                $('#challenge').val(fixedname);
-            }
-            $('#challengeModal').modal('show');
         }
 
     </script>

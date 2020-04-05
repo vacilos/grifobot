@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Math;
 use App\Plan;
+use App\Score;
+use Auth;
 use Illuminate\Http\Request;
 
 class PlanController extends Controller
@@ -203,8 +205,10 @@ class PlanController extends Controller
                 array_push($questions, $pat->id);
             }
         }
+
+        $scores = Score::where('plan_id', $plan->id)->orderBy('score','desc')->orderBy('movements', 'asc')->get();
         //
-        return view('plans.play', compact('pattern', 'size', 'blocked', 'plan', 'questions'));
+        return view('plans.play', compact('pattern', 'size', 'blocked', 'plan', 'questions', 'scores'));
     }
     /**
      * Display the specified resource.
@@ -394,6 +398,25 @@ class PlanController extends Controller
         return redirect(route('play_plan', ['plan' => $finalPlan->id]));
     }
 
+    public function startExPlan() {
+
+        $user = Auth::user();
+
+        $level = $user->level;
+
+        $userScores = Score::where('user_id', $user->id)->get()->pluck('id');
+
+        $newPlan = Plan::where('level','=',$user->level)->whereNotIn('id', $userScores)->orderBy(\DB::raw('RAND()'))->first();
+
+        if($newPlan == null) {
+            return redirect(route('start_plan', ['size' => 6, 'level' => $level]));
+        }
+
+
+        return redirect(route('play_plan', ['plan' => $newPlan->id]));
+
+    }
+
     public function startPlanKinder($size, $level, $diff) {
         //
         $size = $size;
@@ -518,5 +541,13 @@ class PlanController extends Controller
         $finalPlan->save();
 
         return redirect(route('play_plan_kinder', ['plan' => $finalPlan->id]));
+    }
+
+    public function planDetails(Plan $plan) {
+
+        $scores = Score::where('plan_id', '=', $plan->id)->orderBy('score','DESC')->get();
+
+        return view('plans.details', compact('scores', 'plan'));
+
     }
 }

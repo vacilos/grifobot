@@ -1,34 +1,71 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center" style="padding-top:20px;">
-        <div class="col-sm-12">
-            <div class="alert alert-danger" role="alert">
-                ΣΗΜΑΝΤΙΚΟ! Χρειαζόμαστε τις ιδέες σου. Πάτα <a href="{{ route('logo') }}">εδώ</a> για να δεις
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/el_GR/sdk.js#xfbml=1&autoLogAppEvents=1&version=v6.0&appId=713822995484844"></script>
+
+    <div class="container">
+    <div class="row justify-content-center">
+        @if(sizeof($challenges) > 0)
+            <div class="alert alert-danger alert-dismissible fade show">  <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <h4>Έχεις Challenge!</h4>
+            <p>
+                Κάποιος χρήστης σου έχει κάνει challenge να παίξεις μία πίστα. Λεπτομέρειες: <a href="{{ route('user_challenges') }}" class="btn btn-info">εδώ</a>
+            </p>
             </div>
-        </div>
+        @endif
     </div>
     <div class="row justify-content-center">
+
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-header"><h3>{{ Auth::user()->name }} <a href="{{ route("user_change_profile") }}" class="btn btn-sm btn-info">Αλλαγή προφίλ</a></h3> </div>
+                <div class="card-header"><h3>Ελεύθερο Παιχνίδι</h3> </div>
 
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col text-center">
+
                             @if(Auth::user()->level == 7)
                                 <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 1]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ απλό</a>
                                 <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 2]) }}" class="btn btn-warning btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ μέτριο</a>
                                 <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 3]) }}" class="btn btn-danger btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ δύσκολο</a>
                             @else
-                                <a href="{{ route('start_plan', ['size'=> 6, 'level' => Auth::user()->level]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ ΤΩΡΑ</a>
+                                <a href="{{ route('start_plan_ex', ['size'=> 6, 'level' => Auth::user()->level]) }}" class="btn btn-success btn-lg btn-block"><br/><i class="fa fa-play-circle"></i> ΠΑΙΞΕ ΤΩΡΑ<Br/><br/></a>
+                                <small>Παίξε στο ελεύθερο παιχνίδι μία πίστα και στη συνέχεια προσκάλεσε φίλους σου να δεις αν μπορούν να φτάσουν στο σκορ σου!</small>
                             @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header"><h3>Τουρνουά</h3> </div>
+
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col text-center">
+                            Το επόμενο τουρνουά για το επίπεδο <b>{{ Auth::user()->showSMG() }}</b> είναι στις <br/>
+
+                            <h1>8 Απριλίου 2020 17:00 - 21:00</h1>
+
+                            <small>θα εμφανιστεί σε αυτό το σημείο κουμπί συμμετοχής την ώρα έναρξης του τουρνουά</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <div class="card-header"><h3><img src="{{asset('images')}}/{{ Auth::user()->avatar }}" class="img-fluid" style="max-width:50px;" /> {{ Auth::user()->name }} <a href="{{ route("user_change_profile") }}" class="btn btn-sm btn-info">Αλλαγή προφίλ</a></h3> </div>
+
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col text-center">
+                            Έχεις παίξει <b>{{$count}}</b> παιχνίδια<br/>
+                            Έχεις κερδίσει <b>{{$total}}</b> πόντους <br/>
+                            Έχεις κάνει <b>{{$moves}}</b> κινήσεις<br/>
                             <hr/>
-                            Έχεις παίξει <b>{{$count}}</b> παιχνίδια και έχεις συγκεντρώσει <b>{{$total}}</b> πόντους
-                            <hr/>
-                            <br/>
-                            <img src="{{asset('images')}}/{{ Auth::user()->avatar }}" class="img-fluid" />
                         </div>
                     </div>
                     <div class="row justify-content-center">
@@ -38,21 +75,26 @@
                             @if (Auth::user()->municipality)
                                 {{ Auth::user()->municipality }}
                             @endif
-                            <br/>
-                            <a href="{{ route('user_badges') }}" class="btn btn-warning"><i class="fa fa-certificate"></i> Τα μετάλλιά μου</a>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col text-center">
+                            <a href="{{ route('user_badges') }}" class="btn btn-warning"><i class="fa fa-certificate"></i> Μετάλλια</a>
+                            <a href="{{ route('user_challenges') }}" class="btn btn-danger"><i class="fa fa-users"></i> Challenges</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
+    </div>
+    <div class="row" style="margin-top:20px;">
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-header"><h3>5 πιο πρόσφατα δικά σου</h3></div>
+                <div class="card-header"><h3>10 πρόσφατα</h3></div>
                 <div class="card-body">
                     <div>
                         <h3></h3>
-                        <table class="table table-bordered table-striped table-sm">
+                        <table class="table table-bordered table-striped table-sm table-responsive-sm">
                             <thead>
                                 <tr>
                                    <th>
@@ -60,9 +102,6 @@
                                    </th>
                                     <th>
                                         Σκορ
-                                    </th>
-                                    <th>
-                                        Ενέργεια
                                     </th>
                                 </tr>
                             </thead>
@@ -80,9 +119,6 @@
 {{--                                        <td>--}}
 {{--                                            {{ \Carbon\Carbon::parse($score->updated_at)->format('d.m.Y H:i')}}--}}
 {{--                                        </td>--}}
-                                        <td>
-                                            <a href="{{ route("play_plan", ['plan'=> $score->plan->id]) }}" class="btn btn-info btn-sm">Παίξε πάλι</a>
-                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -94,11 +130,11 @@
         </div>
         <div class="col-sm-4">
             <div class="card">
-                <div class="card-header"><h3>Top5 / 24h</h3></div>
+                <div class="card-header"><h3>Top 10 / 24h</h3></div>
 
                 <div class="card-body">
                     <div>
-                        <table class="table table-bordered table-striped table-sm">
+                        <table class="table table-bordered table-striped table-sm table-responsive-sm">
                             <thead>
                             <tr>
                                 <th colspan="3">24 ωρών στο επίπεδο {{ Auth::user()->showSMG() }}</th>
@@ -111,7 +147,7 @@
                                         {{$loop->index+1}}
                                     </td>
                                     <td>
-                                        {{$stat->username}}
+                                        <img src="{{asset('images')}}/{{$stat->avatar}}" class="img-fluid" style="max-width:30px;"/>&nbsp; {{$stat->username}}
                                     </td>
                                     <td>
                                         {{number_format($stat->totalScore, 0, ',','.')}}
@@ -124,13 +160,14 @@
                     </div>
                 </div>
             </div>
-            <hr/>
+        </div>
+        <div class="col-sm-4">
             <div class="card">
-                <div class="card-header"><h3>Top5 / 7d</h3></div>
+                <div class="card-header"><h3>Top 10 / 7d</h3></div>
 
                 <div class="card-body">
                     <div>
-                        <table class="table table-bordered table-striped table-sm">
+                        <table class="table table-bordered table-striped table-sm table-responsive-sm">
                             <thead>
                             <tr>
                                 <th colspan="3">7 ημερών στο επίπεδο {{ Auth::user()->showSMG() }}</th>
@@ -143,7 +180,7 @@
                                         {{$loop->index+1}}
                                     </td>
                                     <td>
-                                        {{$stat->username}}
+                                        <img src="{{asset('images')}}/{{$stat->avatar}}" class="img-fluid" style="max-width:30px;"/>&nbsp; {{$stat->username}}
                                     </td>
                                     <td>
                                         {{number_format($stat->totalScore, 0, ',','.')}}
@@ -158,28 +195,15 @@
             </div>
         </div>
 
+
     </div>
-    <hr/>
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <h3>Στο ίδιο επίπεδο</h3>
-        </div>
-    </div>
-    <div class="row">
-        @foreach($otherscores as $score)
-            <div class="col">
-                <div class="card">
-                    <div class="card-header"><h5>{{$score->user->name}}</h5></div>
-                    <div class="card-body">
-                        Παιχνίδι: {{ $score->plan_id }} | Σκορ: {{number_format($score->score)}} | Κινήσεις: {{$score->movements}}<br/>
-                    </div>
-                    <div class="card-footer">
-                        <a href="{{ route('play_plan', ['plan' => $score->plan_id]) }}" class="btn btn-sm btn-block btn-info">Παίξε κι εσύ!</a>
-                    </div>
-                </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <br/><br/>
+                <div class="fb-like m-b-md" data-href="https://facebook.com/grifobot" data-width="480" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
             </div>
-        @endforeach
-    </div>
+        </div>
+
 </div>
 
 
