@@ -8,6 +8,7 @@ use App\Challenge;
 use Illuminate\Http\Request;
 use Auth;
 use App\Municipality;
+use App\Tournament;
 
 class UserController extends Controller
 {
@@ -82,7 +83,16 @@ class UserController extends Controller
             $challenge->read = 1;
             $challenge->save();
         }
-        return view('home', compact('total', 'count', 'scores', 'hasBadge', 'stats', 'stats7', 'moves', 'challenges'));
+
+        $datetimeNow = new \DateTime('now');
+        $date = $datetimeNow->format("Y-m-d");
+        $time = $datetimeNow->format("H:i");
+
+
+
+        $activeTournament = Tournament::where('level', $user->level)->where('start_date', '>=', $date)->where('active', 1)->first();
+
+        return view('home', compact('total', 'count', 'scores', 'hasBadge', 'stats', 'stats7', 'moves', 'challenges', 'activeTournament'));
     }
 
     /**

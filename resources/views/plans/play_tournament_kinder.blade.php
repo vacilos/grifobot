@@ -18,10 +18,10 @@
         .grid {
             display: grid;
             grid-gap: 0;
-            grid-template-columns: repeat(6, [col] 10vw);
-            grid-template-rows: repeat(6, [row] 10vw);
-            width: 60vw;
-            border: 3px solid #000;
+            grid-template-columns: repeat({{ $size }}, [col] 10vw);
+            grid-template-rows: repeat({{$size}}, [row] 10vw);
+            width: {{$size*10}}vw;
+            border: 3px solid @if($plan->id%2 == 0)red @else blue @endif ;
             justify-content: center;
             align-content: center;
             margin: 0 auto;
@@ -32,7 +32,7 @@
             font-size: calc(1.5vw);
             padding-top: 1vw;
             text-align: center;
-            border: 1px solid #000;
+            border: 1px solid  @if($plan->id%2 == 0)red @else blue @endif ;
 
         }
 
@@ -48,9 +48,10 @@
                 <h3>{{ $tournament->name }} | Παιχνίδι {{ $game }}/6</h3>
                 <main class="grid">
                     @foreach($pattern as $pat)
-                        <b id="pos{{$pat->id}}" @if($pat->blocked == true)style="background-color: black;"@endif>
-                        @if($pat->player == true) <div id="pos{{$pat->id}}p"><img src="{{asset('images')}}/{{Auth::user()->avatar}}" style="overflow: hidden;display:inline;" /></div> @endif
-                            @if($pat->math == true) <div id="pos{{$pat->id}}e"><a href="javascript:mathClicked({{$pat->matheq}}, {{$pat->id}});">Άσκηση</a></div> @endif
+                        <b id="pos{{$pat->id}}">
+                            @if($pat->player == true) <div id="pos{{$pat->id}}p"><img src="{{asset('images')}}/{{Auth::user()->avatar}}" style="overflow: hidden;display:inline;" /></div> @endif
+                            @if($pat->math == true) <div id="pos{{$pat->id}}e"><img src="{{asset('images')}}/kinder{{$pat->matheq}}.jpg" style="overflow: hidden;display:inline; max-width: calc(8vw);" /></div> @endif
+                            @if($pat->blocked == true) <div id="pos{{$pat->id}}b"><img src="{{asset('images')}}/dog0.jpg" style="overflow: hidden;display:inline; max-width: calc(8vw);" /></div> @endif
                         </b>
                 @endforeach
                 </main>
@@ -73,6 +74,13 @@
 
                     <hr style="clear:both;"/>
                     <h4>ΣΚΟΡ: <span id="score">0</span></h4>
+                    <hr/>
+                    <h4>Εικόνες που πρέπει να πας</h4>
+                    <div class="row">
+                        @foreach($pattern as $pat)
+                            @if($pat->math == true) <div class="col-sm-3"><img src="{{asset('images')}}/kinder{{$pat->matheq}}.jpg" class="img-fluid" /></div> @endif
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,42 +88,6 @@
     </div>
 
 
-
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Άσκηση</h5>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <h1><span id="modalquestion"></span></h1>
-                            <br/><br/>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12 text-center">
-                            <h5>Απάντηση:</h5>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div id="answerinmodal">
-                                <input id="answer" name="answer" type="text" class="form-control" style="font-size:30px;" placeholder="Γράψε την απάντησή σου" autocomplete="off"/>
-                            </div>
-                            <div id="multiplechoiceinmodal" class="text-center">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="modalbutton" onclick="javascript:submitModal();">Πάμε!</button>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="modal fade" id="endGameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -139,7 +111,7 @@
                 </div>
                 <div class="modal-footer">
                     @if($game < 6)
-                    <a href="{{ route('play_tournament', ['tournament'=> $tournament, 'game' => $game+1]) }}" class="btn btn-success">Επόμενο</a>
+                        <a href="{{ route('play_tournament', ['tournament'=> $tournament, 'game' => $game+1]) }}" class="btn btn-success">Επόμενο</a>
                     @else
                         <a href="{{ route('finish_tournament', ['tournament'=> $tournament]) }}" class="btn btn-success">ΤΕΛΟΣ</a>
                     @endif
@@ -149,16 +121,17 @@
         </div>
     </div>
 
-    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal fade" id="collisionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ΜΠΡΑΒΟ</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">ΟΥΠΣ</h5>
                 </div>
-                <div class="modal-body">
-                    <p>
-                    Τώρα χρησιμοποίησε τα βελάκια για να οδηγήσεις τον παίκτη στο χρωματιστό κελι!<Br/>
-                    ΠΡΟΣΟΧΗ! Έχεις μόνο μία ευκαιρία και αν δοκιμάσεις να λύσεις άλλη άσκηση θα χάσεις τους πόντους.
+                <div class="modal-body text-center">
+                    <p class="text-center">
+                        <img src="{{asset('images/dog2.jpg')}}" style="max-width:150px;" /><br/>
+                        Ξύπνησες το σκυλο...
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -167,34 +140,16 @@
             </div>
         </div>
     </div>
-
-    <div class="modal fade" id="failModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">ΚΡΙΜΑ</h5>
-                </div>
-                <div class="modal-body">
-                    <p>
-                    Η απάντηση δεν ήταν σωστή. Προσπάθησε κάποια άλλη άσκηση.
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Πάμε!</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="modal fade" id="correctPlaceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">ΜΠΡΑΒΟ</h5>
                 </div>
-                <div class="modal-body">
-                    <p>
-                        Έφτασες στο σωστό τετράγωνο με <span id="currentMoves"></span> κινήσεις!
+                <div class="modal-body text-center">
+                    <p class="text-center">
+                        <img src="{{asset('images/dog1.jpg')}}" style="max-width:150px;" /><br/>
+                        Εικόνες που πήγες: <span id="currentVisited"></span>!
                         <br/>Πήρες <span id="currentPoints"></span> πόντους!
                     </p>
                 </div>
@@ -210,9 +165,11 @@
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">ΚΡΙΜΑ</h5>
                 </div>
-                <div class="modal-body">
-                    <p>
-                    Δεν έφτασες στο σωστό κουτί!
+                <div class="modal-body text-center">
+                    <p class="text-center">
+                        <i class="fa fa-frown-o fa-5" style="color: red; font-size:48px;"></i><Br/>
+
+                        Δεν πέρασες από κάποια εικόνα!
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -225,25 +182,22 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Οδηγίες | Λύσε τους γρίφους με τις λιγότερες κινήσεις</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Οδηγίες | Βρες το δρόμο για τις εικόνες</h5>
                 </div>
                 <div class="modal-body">
                     <p>
-                        Σκοπός του παιχνιδιού είναι να απαντήσεις σωστά τις ερωτήσεις του πίνακα κάνοντας με τον παίκτη σου τις λιγότερες κινήσεις.
+                        Σκοπός του παιχνιδιού είναι να περάσει ο παίκτης πάνω από τις εικόνες με μια μόνο εντολή κινήσεων.
                     </p>
                     <p>
-                        <b>Βήμα 1: </b> Πάτα σε μία άσκηση<br/>
-                        <b>Βήμα 2: </b> Λύσε την άσκηση γράφοντας τη σωστή απάντηση<br/>
-                        <b>Βήμα 3: </b> Αν βρήκες τη σωστή απάντηση, το τετράγωνο χρωματίζεται<br/>
-                        <b>Βήμα 4: </b> Χρησιμοποίησε τα βελάκια για να οδηγήσεις την εικόνα σου στο χρωματισμένο τετράγωνο. Έχεις μια ευκαιρία!<br/>
-                        <b>Βήμα 5: </b> Αν φτάσεις στο χρωματισμένο τετράγωνο κερδίζεις πόντους<br/>
-                        <b>Βήμα 6: </b> Συνέχισε μέχρι να τελειώσουν όλες οι ασκήσεις στον πίνακα<br/>
+                        <b>Βήμα 1: </b> Χρησιμοποίησε τα μπλε βέλη για να σχεδιάσεις τη διαδρομή σου<br/>
+                        <b>Βήμα 2: </b> Πάτα το πράσινο κουμπί "ΞΕΚΙΝΑ"<br/>
+                        <b>Βήμα 3: </b> Αν πέρασες από τις εικόνες που πρέπει να πας παίρνεις πόντους<br/>
                     </p>
                     <p>
                         <b>Προσοχή!</b>
                         <ul>
-                            <li>Κάθε φορά έχεις μία ευκαιρία να φτάσεις μέχρι το χρωματισμένο τετράγωνο.</li>
-                            <li>Απαγορεύεται να χτυπήσεις στις άκρες ή να πατήσεις στα μαύρα τετράγωνα!</li>
+                            <li>Κάθε φορά έχεις μία ευκαιρία να φτιάξεις ολόκληρη τη διαδρομή.</li>
+                            <li>Απαγορεύεται να χτυπήσεις στις άκρες ή να ξυπνήσεις το σκυλο!</li>
                         </ul>
                     </p>
                 </div>
@@ -261,7 +215,7 @@
 
     <script type="text/javascript">
         $(document).ready(function() {
-            disableArrows();
+            //disableArrows();
             $('#instructionsModal').modal('show');
 
             $('#exampleModal').on("shown.bs.modal", function() {
@@ -276,6 +230,8 @@
         var totalmoves = 0;
         var moves = [];
         var blocks = [];
+        var questions = [];
+        var visited = [];
         var patternSize = {{ $size }};
         var collision = 0;
         var counter = 0;
@@ -285,6 +241,10 @@
         var plan = {{ $plan->id }};
         var userId = {{ Auth::user()->id }}
         var totalQuestions = {{ sizeof($questions) }};
+        var isSameSet = function( arr1, arr2 ) {
+            return  $( arr1 ).not( arr2 ).length === 0 && $( arr2 ).not( arr1 ).length === 0;
+        }
+
         var completedQuestions = 0;
 
         @foreach($pattern as $pat)
@@ -296,7 +256,9 @@
         @foreach($blocked as $block)
             blocks.push({{ $block }});
         @endforeach
-
+        @foreach($questions as $question)
+            questions.push({{ $question }});
+        @endforeach
 
         function selectedAction(i) {
             if(i == "L") {
@@ -344,32 +306,51 @@
 
         function printCounter() {
             if(collision == 1) {
-                clearMoves();
-                checkEndGame();
+                console.log('hit');
+                endGame();
             } else {
                 movePlayer(moves[counter], counter);
                 counter++;
+                console.log("player is at"+player);
                 if (counter < moves.length && collision != 1) {
+                    // check if we are on a special place
+                    if(questions.includes(player)) {
+                        $("#pos"+player+"e").html("");
+                       visited.push(player);
+                    } // if the player is in a place where a symbol is
                     setTimeout(printCounter, 900);
+                } else if(collision == 1) {
+                    $("#collisionModal").modal('show');
+                    endGame();
                 } else {
-                    if(player == currentQuestion && collision != 1) {
-                        var currentMoves = moves.length;
-                        totalmoves += moves.length;
-                        score += parseInt(100/currentMoves);
+                    // if visited is the same as questions
+                    if(questions.includes(player)) {
+                        $("#pos"+player+"e").html("");
+                        visited.push(player);
+                    } // if the player is in a place where a symbol is
 
-                        $('#currentMoves').html(currentMoves);
-                        $("#currentPoints").html(parseInt(100/currentMoves));
-                        submitScore(score, plan, userId, totalmoves);
+                    // var result = isSameSet(visited, questions);
+                    var result = visited.length;
+
+                    if(result > 0) {
+                        score = result * 100;
+
+                        $('#currentMoves').html(moves.length);
+                        $('#currentVisited').html(visited.length);
+                        $("#currentPoints").html(score);
+                        submitScore(score, plan, userId, moves.length);
                         $("#score").html(score);
                         $("#correctPlaceModal").modal('show');
                         $('#pos'+currentQuestion).css('background-color', 'white');
                     } else {
-                        $("#incorrectPlaceModal").modal('show');
-                        $('#pos'+currentQuestion).css('background-color', 'white');
-                        currentQuestion = -10;
+                        if(collision == 1) {
+                            $("#collisionModal").modal('show');
+                            endGame();
+                        } else {
+                            $("#incorrectPlaceModal").modal('show');
+                        }
                     }
-                    setTimeout(clearMoves, 2000);
-                    checkEndGame();
+                    endGame();
                 }
             }
 
@@ -384,28 +365,24 @@
                     todo = player - patternSize;
                     if(todo < 0 || todo > patternSize*patternSize || blocks.includes(todo)) {
                         collision = 1;
-                        alert('ΧΤΥΠΗΣΕ');
                     }
                     break;
                 case "D":
                     todo = player + patternSize;
                     if(todo < 0 || todo > patternSize*patternSize || blocks.includes(todo)) {
                         collision = 1;
-                        alert('ΧΤΥΠΗΣΕ');
                     }
                     break;
                 case "R":
                     todo = player + 1;
                     if(todo < 0 || todo > patternSize*patternSize || player%patternSize==0 || blocks.includes(todo)) {
                         collision = 1;
-                        alert('ΧΤΥΠΗΣΕ');
                     }
                     break;
                 case "L":
                     todo = player - 1;
                     if(todo < 0 || todo > patternSize*patternSize || player%patternSize==1 || blocks.includes(todo)) {
                         collision = 1;
-                        alert('ΧΤΥΠΗΣΕ');
                     }
                     break;
             }
@@ -418,56 +395,6 @@
                 $('#pos'+currentQuestion).css('background-color', 'white');
 
             }
-
-        }
-
-        function mathClicked(mathId, eq) {
-            solvingEquation = 1;
-            currentQuestion = eq;
-            completedQuestions++;
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                }
-            });
-            $.ajax({
-                type:'POST',
-                url:'{{ route('mathquestion') }}',
-                data:
-                    {
-                        id: mathId
-                    },
-                success:function(data) {
-                    // OPEN modal
-                    currentAnswer = data.answer;
-                    var wrong = data.wrong;
-                    console.log(wrong);
-                    if(wrong.length > 0) {
-                        //create buttons
-                        var buttoncode = "<h5>Διάλεξε τη σωστή απάντηση</h5>";
-                        for(var i=0; i<wrong.length; i++) {
-                            buttoncode += '<button onclick="submitModal(\''+wrong[i]+'\');" class="btn btn-lg btn-info" style="font-size: 26px; margin:5px 10px;">'+wrong[i]+'</button>';
-                        }
-                        $('#answerinmodal').hide();
-                        $('#multiplechoiceinmodal').show();
-                        $('#multiplechoiceinmodal').html(buttoncode);
-                    } else {
-                        $('#multiplechoiceinmodal').html("");
-                        $('#answerinmodal').show();
-                        $('#multiplechoiceinmodal').hide();
-                    }
-                    $("#modalquestion").html(data.question);
-                    $('#exampleModal').modal({
-                        keyboard: false,
-                        backdrop: 'static',
-                    });
-
-
-                },
-                error:function(data) {
-                    console.log(data)
-                }
-            });
 
         }
 
@@ -499,34 +426,6 @@
 
         }
 
-        function submitModal(i = null) {
-            $('#exampleModal').modal('hide');
-            var mathId = currentQuestion;
-
-            var answer = $('#answer').val();
-            var regex = /(\d+)\./g;
-            if (answer.match(regex)) {
-                answer = answer.replace(regex, "$1");
-            }
-            if(i != null) {
-                answer = i;
-            }
-
-            if(answer == currentAnswer) {
-                // enable the keys!
-                $("#successModal").modal('show');
-                $('#pos'+currentQuestion).css('background-color', 'magenta');
-                enableArrows();
-
-            } else {
-                // remove the current question
-                $("#failModal").modal('show');
-                checkEndGame();
-            }
-            $('#answer').val('');
-            $('#pos'+currentQuestion+"e").remove();
-
-        }
 
         function enableArrows() {
             $('#bl').prop('disabled', false);
@@ -545,11 +444,9 @@
             $('#bdel').prop('disabled', true);
         }
 
-        function checkEndGame() {
-            console.log('checking end');
-            if(completedQuestions == totalQuestions) {
-                console.log('checking end');
-                $("#failModal").on('hidden.bs.modal', function(e) {
+        function endGame() {
+            //check what happens
+                $("#collisionModal").on('hidden.bs.modal', function(e) {
                     $("#endGameScore").html(score);
                     $('#endGameModal').modal({
                         keyboard: false,
@@ -570,9 +467,11 @@
                         backdrop: 'static',
                     });
                 });
-
-            }
         }
 
     </script>
+@endsection
+
+@section('footer')
+    Images on this level <a href="http://www.freepik.com">Designed by macrovector / Freepik</a>
 @endsection

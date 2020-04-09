@@ -10,9 +10,8 @@
 
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <div class="col text-center">
-                                Αποτελέσματα
-                                <hr/>
+                            <div class="col text-left">
+                                <button class="btn btn-info btn-sm" onclick="javascript:history.go(-1);"><i class="fa fa-chevron-left"></i> Πίσω</button>
                                 <table class="table table-bordered table-striped table-sm">
                                     <thead>
                                         <tr>

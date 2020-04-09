@@ -73,10 +73,12 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
     Route::get('/newsletter/{answer}/answer', 'UserController@newsletter')->name('user_newsletter_answer');
     Route::get('/{plan}/play/', 'PlanController@play')->name('play_plan');
     Route::get('/{plan}/play/kinder', 'PlanController@playKinder')->name('play_plan_kinder');
-    Route::get('/{tournament}/start', 'TournamentController@beginTournament')->name('begin_tournament');
-    Route::get('/{tournament}/play/{game}/game', 'TournamentController@playTournament')->name('play_tournament');
-    Route::get('/{tournament}/finish', 'TournamentController@finishTournament')->name('finish_tournament');
-    Route::get('/{tournament}/results', 'TournamentController@resultsTournament')->name('results_tournament');
+    Route::get('/tournament/{tournament}/start', 'TournamentController@startTournament')->name('start_tournament');
+    Route::get('/tournament/list', 'TournamentController@listTournament')->name('list_tournament');
+    Route::get('/tournament/{tournament}/begin', 'TournamentController@beginTournament')->name('begin_tournament');
+    Route::get('/tournament/{tournament}/play/{game}/game', 'TournamentController@playTournament')->name('play_tournament');
+    Route::get('/tournament/{tournament}/finish', 'TournamentController@finishTournament')->name('finish_tournament');
+    Route::get('/tournament/{tournament}/results', 'TournamentController@resultsTournament')->name('results_tournament');
     Route::get('/plan/{size}/{level}/start/', 'PlanController@startPlan')->name('start_plan');
     Route::get('/plan/{size}/{level}/start/ex', 'PlanController@startExPlan')->name('start_plan_ex');
     Route::get('/plan/{size}/{level}/{diff}/start/kinder', 'PlanController@startPlanKinder')->name('start_plan_kinder');

@@ -45,11 +45,23 @@
                 <div class="card-body">
                     <div class="row justify-content-center">
                         <div class="col text-center">
-                            Το επόμενο τουρνουά για το επίπεδο <b>{{ Auth::user()->showSMG() }}</b> είναι στις <br/>
+                            @if($activeTournament != null)
+                                @if(date('Y-m-d') == $activeTournament->start_date && date('H:i') < $activeTournament->end_time && date('H:i') >= $activeTournament->start_time)
+                                    <a href="{{ route('start_tournament', ['tournament'=> $activeTournament]) }}" class="btn btn-danger btn-lg btn-block"><br/><i class="fa fa-play-circle"></i> ΕΚΚΙΝΗΣΗ ΤΟΥΡΝΟΥΑ<Br/><br/></a>
+                                @elseif( (date('Y-m-d') == $activeTournament->start_date && date('H:i') < $activeTournament->start_time) || date('Y-m-d') < $activeTournament->start_date )
+                                    Το επόμενο τουρνουά για το επίπεδο <b>{{ Auth::user()->showSMG() }}</b> είναι στις <br/>
+                                    <h2 style="color: red;">{{ \Carbon\Carbon::parse($activeTournament->start_date)->format('d / m / Y')}}<br/>
+                                    {{ $activeTournament->start_time }} - {{ $activeTournament->end_time }}</h2>
+                                    <small>θα εμφανιστεί σε αυτό το σημείο κουμπί συμμετοχής την ώρα έναρξης του τουρνουά</small>
+                                @else
+                                    Δεν έχει οριστεί κάποιο τουρνουά
 
-                            <h1>8 Απριλίου 2020 17:00 - 21:00</h1>
-
-                            <small>θα εμφανιστεί σε αυτό το σημείο κουμπί συμμετοχής την ώρα έναρξης του τουρνουά</small>
+                                @endif
+                            @else
+                                Δεν έχει οριστεί κάποιο τουρνουά
+                            @endif
+                            <br/><br/>
+                            <a href="{{ route('list_tournament') }}" class="btn btn-sm btn-info">Ολοκληρωμένα Τουρνουά</a>
                         </div>
                     </div>
                 </div>
