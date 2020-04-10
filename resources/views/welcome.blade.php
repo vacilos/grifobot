@@ -129,11 +129,6 @@
                     <div class="m-b-md">
                         <a href="{{route('user_home')}}" class="btn btn-lg btn-success">ΠΑΙΞΕ ΤΩΡΑ</a>
                     </div>
-                    <div class="alert alert-danger">
-                        <h4>Τουρνουά Γριφομπότ</h4>
-                        <h4>Τετάρτη 8.4.2020 17:00 - 21:00</h4>
-                        <small>Θα εμφανιστεί κουμπί συμμετοχής στην κεντρική σελίδα! ;)  ...πείτε το και στους φίλους σας για να δείτε πως θα τα πάει ο καθένας!</small>
-                    </div>
                     <div class="fb-like m-b-md" data-href="https://facebook.com/grifobot" data-width="480" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
                 </div>
             </div>

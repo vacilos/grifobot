@@ -53,7 +53,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin', 'auth']], func
     Route::resource('/categories', 'CategoryController');
     Route::resource('/badges', 'BadgeController');
     Route::resource('/tournaments', 'TournamentController');
-
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
