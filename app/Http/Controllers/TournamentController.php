@@ -221,7 +221,7 @@ class TournamentController extends Controller
 
 
     }
-    public function playTournament(Tournament $tournament, $game) {
+    public function     playTournament(Tournament $tournament, $game) {
         $user = Auth::user();
 
         $currentDate = new \DateTime();

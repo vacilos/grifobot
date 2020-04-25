@@ -11,6 +11,11 @@ class Math extends Model
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    public function quizzes() {
+        return $this->belongstoMany(Quiz::class, 'quiz_math')->withTimestamps();
+    }
+
     public function showLevel() {
         if($this->level == 1) {
             return "Α' Δημοτικού";

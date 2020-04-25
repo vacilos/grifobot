@@ -26,6 +26,10 @@ Route::get('/help', function () {
     return view('help');
 })->name('help');
 
+Route::get('/quiz', function () {
+    return view('quiz');
+})->name('quiz');
+
 Route::get('/version', function () {
     return view('version');
 })->name('version');
@@ -42,9 +46,35 @@ Route::get('/students', function () {
     return view('students');
 })->name('students');
 
+Route::get('/quiz/start', function () {    return view('quiz.start');})->name('quiz_play_start');
+Route::post('/quiz/play/name', 'QuizController@playName')->name('quiz_play_name');
+Route::post('/quiz/play', 'QuizController@play')->name('quiz_play');
+Route::post('/quiz/question', 'QuizController@question')->name('quiz_question');
+Route::post('/quiz/recordScore', 'QuizScoreController@record')->name('quiz_score_record');
+Route::get('/quiz/public', 'QuizController@publicQuiz')->name('quiz_public');
+Route::get('/quiz/{pin}/results', 'QuizController@results')->name('quiz_results');
+
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::group(['prefix' => 'teacher', 'middleware' => ['role:teacher|admin', 'auth']], function() {
+    Route::get('/quiz/my', 'QuizController@myQuizzes')->name('quiz_my');
+    Route::get('quiz/create/start', 'QuizController@create')->name('quiz_start');
+    Route::post('quiz/create/store', 'QuizController@store')->name('quiz_store');
+    Route::get('quiz/{quiz}/add/{question}/question', 'QuizController@addQuestion')->name('quiz_add_question');
+    Route::post('quiz/{quiz}/store/{question}/question', 'QuizController@storeQuestion')->name('quiz_store_question');
+    Route::get('quiz/{quiz}/finished', 'QuizController@finished')->name('quiz_finished');
+    Route::get('quiz/{quiz}/show', 'QuizController@show')->name('quiz_show');
+    Route::get('quiz/{quiz}/results', 'QuizController@resultsTeacher')->name('quiz_teacher_results');
+    Route::get('quiz/{quiz}/edit', 'QuizController@edit')->name('quiz_edit');
+    Route::patch('quiz/{quiz}/update', 'QuizController@update')->name('quiz_update');
+    Route::get('quiz/{quiz}/question/{math}/edit', 'QuizController@editQuestion')->name('quiz_edit_math');
+    Route::patch('quiz/{quiz}/question/{math}/update', 'QuizController@updateQuestion')->name('quiz_update_math');
+    Route::get('quiz/{quiz}/questions', 'QuizController@questions')->name('quiz_questions');
+});
+
 
 Route::group(['prefix' => 'admin', 'middleware' => ['role:admin', 'auth']], function() {
     Route::resource('/maths', 'MathController');
@@ -53,6 +83,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['role:admin', 'auth']], func
     Route::resource('/categories', 'CategoryController');
     Route::resource('/badges', 'BadgeController');
     Route::resource('/tournaments', 'TournamentController');
+    Route::get('/customplans/designstart', 'PlanController@designStart')->name('design_start');
+    Route::post('/customplans/design', 'PlanController@design')->name('design');
+    Route::post('/customplans/designstore', 'PlanController@design')->name('design_store');
+    Route::get('ajax/math/fetch', 'MathController@mathsSelect')->name('maths_select');
 });
 
 Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {

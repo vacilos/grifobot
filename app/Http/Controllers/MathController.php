@@ -226,4 +226,31 @@ class MathController extends Controller
 
         return response()->json(['answer'=>$number]);
     }
+
+
+
+    /**
+     * ajax call to fetch math id data
+     */
+    public function mathsSelect(Request $request) {
+        $user = Auth::user();
+
+        $term = $request->term;
+
+        $results = array();
+        $maths = Math::where('creator_user_id', $user->id)->where('question', 'like', '%'.$term.'%' )->get();
+        foreach($maths as $math) {
+            $text=$math->question."###".$math->answer;
+            $text .= $math->answer_alt1 == null?"":"###".$math->answer_alt1;
+            $text .= $math->answer_alt2 == null?"":"###".$math->answer_alt2;
+            $text .= $math->answer_alt3 == null?"":"###".$math->answer_alt3;
+            $text .= $math->answer_alt4 == null?"":"###".$math->answer_alt4;
+            $results["results"][] = array(
+                "id" => $math->id,
+                "text" => $text
+            );
+        }
+
+        return response()->json($results);
+    }
 }

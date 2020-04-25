@@ -6,6 +6,7 @@
 
     <div class="container">
     <div class="row justify-content-center">
+        <div class="col-sm-12 text-center">
         @if(sizeof($challenges) > 0)
             <div class="alert alert-danger alert-dismissible fade show">  <button type="button" class="close" data-dismiss="alert">&times;</button>
             <h4>Έχεις Challenge!</h4>
@@ -14,6 +15,15 @@
             </p>
             </div>
         @endif
+            <div class="alert alert-danger alert-dismissible fade show">  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                <h4>Γριφομπότ ΚΟΥΙΖ!</h4>
+                <p>
+                    Ήρθαν τα Γριφομπότ ΚΟΥΙΖ. Δοκίμασε κι εσύ!
+                    <br/>
+                    <a href="{{route('quiz_public')}}" class="btn btn-lg btn-danger">Γριφομπότ ΚΟΥΙΖ!</a>
+                </p>
+            </div>
+        </div>
     </div>
     <div class="row justify-content-center">
 

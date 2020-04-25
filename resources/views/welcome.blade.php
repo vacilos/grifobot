@@ -112,54 +112,34 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="title">
-                        Γριφο<span style="color: deeppink;">μπότ</span> <span style="font-size: 11px;">έκδοση 1.3</span>
+                        Γριφο<span style="color: firebrick;">μπότ</span> <span style="font-size: 11px;">έκδοση 1.4</span>
                     </div>
                     <div>
-                        <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.3</a>
+                        <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.4 (firebrick)</a>
                     </div>
                     <div>
                         <p>
                             Παιχνίδι για μαθητές <b>ΔΗΜΟΤΙΚΟΥ ΚΑΙ ΝΗΠΙΑΓΩΓΕΙΟΥ</b> για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα
                         </p>
                     </div>
-
-                    <h5>
-                        Μέχρι σήμερα έχουν παιχτεί <b style="color:red;">{{ number_format($count, 0, ',','.') }}</b> παιχνίδια, έχουν απαντηθεί σωστά <b style="color: green">{{ number_format($answers, 0, ',','.') }}</b> ασκήσεις, έχουν γίνει <b style="color: blue;">{{ number_format($moves, 0, ',','.') }}</b> κινήσεις με συνολικό σκορ <b style="color: magenta">{{ number_format($total, 0, ',','.') }}</b>.
-                    </h5>
                     <div class="m-b-md">
                         <a href="{{route('user_home')}}" class="btn btn-lg btn-success">ΠΑΙΞΕ ΤΩΡΑ</a>
                     </div>
+                    <div class="alert alert-danger">
+                        Νέα έκδοση!!!<br/>
+                        Γριφομπότ ΚΟΥΙΖ! Δείτε τι είναι πατώντας <a href="{{route('quiz')}}">ΕΔΩ</a><br/><br/>
+                        Βρείτε στο ακόλουθο ελεύθερα ΚΟΥΙΖ <br/><a href="{{route('quiz_public')}}" class="btn btn-lg btn-danger">Γριφομπότ ΚΟΥΙΖ!</a>
+                    </div>
+
+{{--                    <h5>--}}
+{{--                        Μέχρι σήμερα έχουν παιχτεί <b style="color:red;">{{ number_format($count, 0, ',','.') }}</b> παιχνίδια, έχουν απαντηθεί σωστά <b style="color: green">{{ number_format($answers, 0, ',','.') }}</b> ασκήσεις, έχουν γίνει <b style="color: blue;">{{ number_format($moves, 0, ',','.') }}</b> κινήσεις με συνολικό σκορ <b style="color: magenta">{{ number_format($total, 0, ',','.') }}</b>.--}}
+{{--                    </h5>--}}
+
                     <div class="fb-like m-b-md" data-href="https://facebook.com/grifobot" data-width="480" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4">
-                    <table class="table table-striped table-bordered table-sm">
-                        <thead>
-                        <tr>
-                            <td colspan="3">
-                                <h3>
-                                    Top 10 <small class="text-muted">(24ωρών)</small>
-                                </h3>
-                            </td>
-                        </tr>
-                        </thead>
-                        @foreach($stats as $stat)
-                            <tr>
-                                <td>
-                                    {{$loop->index+1}}
-                                </td>
-                                <td class="text-left">
-                                    <img src="{{asset('images')}}/{{$stat->avatar}}" class="img-fluid" style="max-width:20px;"/>&nbsp; {{$stat->username}}
-                                </td>
-                                <td>
-                                    {{number_format($stat->totalScore, 0, ',','.')}}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <table class="table table-striped table-bordered table-sm">
                         <thead>
                         <tr>
@@ -185,7 +165,7 @@
                         @endforeach
                     </table>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-sm-3">
                     <table class="table table-striped table-bordered table-sm">
                         <thead>
                         <tr>
@@ -211,7 +191,7 @@
                         @endforeach
                     </table>
                 </div>
-                <div class="col-sm-12">
+                <div class="col-sm-6">
                     <table class="table table-striped table-bordered table-sm">
                         <thead>
                         <tr>

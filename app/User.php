@@ -65,6 +65,24 @@ class User extends Authenticatable
         if($this->level == 7) {
             return "Νηπιαγωγείο";
         }
+        if($this->level == 8) {
+            return "Α' Γυμνασίού";
+        }
+        if($this->level == 9) {
+            return "Β' Γυμνασίού";
+        }
+        if($this->level == 10) {
+            return "Γ' Γυμνασίού";
+        }
+        if($this->level == 11) {
+            return "Α' Λυκείου";
+        }
+        if($this->level == 12) {
+            return "Β' Λυκείου";
+        }
+        if($this->level == 13) {
+            return "Γ' Λυκείου";
+        }
 
     }
 
@@ -75,11 +93,14 @@ class User extends Authenticatable
 
     public function hasRole($role) {
 
-        if($this->role != $role) {
-            return false;
+        $roles = explode("|", $role);
+        foreach($roles as $r) {
+            if($this->role == $r) {
+                return true;
+            }
         }
 
-        return true;
+        return false;
 
     }
 
@@ -90,4 +111,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Badge::class, 'users_badges');
     }
+
+    public function clasrooms() {
+        return $this->hasMany(Classroom::class);
+    }
+
 }

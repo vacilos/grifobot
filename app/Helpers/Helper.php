@@ -27,15 +27,31 @@ if(!function_exists('display_level')) {
         }
 
         if($level == 7) {
-            return "Α' Γυμνασίού";
+            return "Νηπιαγωγείο";
         }
 
         if($level == 8) {
-            return "Β' Γυμνασίου";
+            return "Α' Γυμνασίού";
         }
 
         if($level == 9) {
+            return "Β' Γυμνασίου";
+        }
+
+        if($level == 10) {
             return "Γ' Γυμνασίου";
+        }
+        if($level == 11) {
+            return "Α' Λυκείου";
+        }
+        if($level == 12) {
+            return "Β' Λυκείου";
+        }
+        if($level == 13) {
+            return "Γ' Λυκείου";
+        }
+        if($level == 100) {
+            return "Άλλο";
         }
     }
 }
@@ -79,5 +95,14 @@ if(!function_exists('fix_equation')) {
         $number = preg_replace($pattern, $replace, $number);
 
         return $number;
+    }
+}
+
+if(!function_exists('random_quiz_token')) {
+    function random_quiz_token($length)
+    {
+        $characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+        return substr(str_shuffle($characters), 0, $length);
     }
 }

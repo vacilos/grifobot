@@ -32,9 +32,7 @@
                             <option value="4">Δ' Δημοτικού</option>
                             <option value="5">Ε' Δημοτικού</option>
                             <option value="6">ΣΤ' Δημοτικού</option>
-{{--                            <option value="7">Α' Γυμνασίου</option>--}}
-{{--                            <option value="8">Β' Γυμνασίου</option>--}}
-{{--                            <option value="9">Γ' Γυμνασίου</option>--}}
+                            <option value="7">Νηπιαγωγείο</option>
                         </select>
                         <small id="levelhelp" class="form-text text-muted">Καταγράψτε το επίπεδο της άσκησης (τάξη)</small>
                     </div>

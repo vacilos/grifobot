@@ -32,6 +32,36 @@ class PlanController extends Controller
         //
         return view('plans.create');
     }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function designStart()
+    {
+        //
+        return view('plans.designstart');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function design(Request $request)
+    {
+        // define pattern
+        $validatedData = $request->validate([
+            'level' => 'required',
+            'size' => 'required',
+        ]);
+
+
+        $level = $request->level;
+        $size = $request->size;
+        //
+        return view('plans.design', compact('level', 'size'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -52,7 +82,7 @@ class PlanController extends Controller
         $level = $request->level;
         $pattern = array();
 
-        $mathQuestions = Math::where('level', $level)->orderBy(\DB::raw('RAND()'))->take(10)->get();
+        $mathQuestions = Math::where('level', $level)->where('personal',0)->orderBy(\DB::raw('RAND()'))->take(10)->get();
         $mathQuestionsArray = $mathQuestions->toArray();
 
         // define blocked
@@ -279,7 +309,7 @@ class PlanController extends Controller
         $level = $level;
         $pattern = array();
 
-        $mathQuestions = Math::where('level', $level)->orderBy(\DB::raw('RAND()'))->take(10)->get();
+        $mathQuestions = Math::where('level', $level)->where('personal',0)->orderBy(\DB::raw('RAND()'))->take(10)->get();
         $mathQuestionsArray = $mathQuestions->toArray();
 
         // define blocked
@@ -550,4 +580,5 @@ class PlanController extends Controller
         return view('plans.details', compact('scores', 'plan'));
 
     }
+
 }

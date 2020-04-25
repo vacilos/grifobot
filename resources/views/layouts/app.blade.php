@@ -113,11 +113,10 @@
 
 
                     @endif
-                    @if(Auth::user()->role == 'teacher')
+                    @if(Auth::user()->role == 'teacher' || Auth::user()->role == 'admin')
                         <!-- Left Side Of Navbar -->
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('maths.index') }}">Ασκήσεις</a>
-
+                                <a class="nav-link" href="{{ route('quiz_my') }}">Κουίζ</a>
                             </li>
                         @endif
                             <li class="nav-item">
@@ -127,6 +126,7 @@
                             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Γριφομπότ</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown02">
                                 <a class="nav-link" href="{{ route('about') }}">Τι είναι</a>
+                                <a class="nav-link" href="{{ route('quiz') }}">Γριφομπότ Κουίζ</a>
                                 <a class="nav-link" href="{{ route('help') }}">Οδηγίες</a>
                                 <a class="nav-link" href="{{ route('students') }}">Παιδιά και Γριφομπότ</a>
                                 <a class="nav-link" href="{{ route('contact') }}">Επικοινωνία</a>
