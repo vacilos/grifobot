@@ -21,10 +21,16 @@ Route::get('/test', 'HomeController@test')->name('test');
 Route::get('/about', function () {
     return view('about');
 })->name('about');
+Route::get('/novel', function () {
+    return view('welcomehome');
+})->name('novel');
 
 Route::get('/help', function () {
     return view('help');
 })->name('help');
+Route::get('/credits', function () {
+    return view('credits');
+})->name('credits');
 
 Route::get('/quiz', function () {
     return view('quiz');

@@ -26,12 +26,19 @@ class QuizController extends Controller
 
     public function playName(Request $request) {
         $pin = $request->pin;
+        $currentDate = new \DateTime();
 
-        $quiz = Quiz::where('pin', '=',$pin)->first();
+        $formattedDate = $currentDate->format("Y-m-d H:i:s");
+
+        $quiz = Quiz::where('pin', '=',$pin)->where( function ($query) use ($formattedDate) {
+            $query->whereNull('end_date')->orWhere('end_date', '>=', $formattedDate);
+        })->first();
 
         if($quiz == null) {
-            return redirect(route('quiz_play_start', array('pin'=>$pin, 'message'=>'Δεν υπάρχει ΚΟΥΙΖ με αυτό το PIN')));
+            return redirect(route('quiz_play_start', array('pin'=>$pin, 'message'=>'Δεν υπάρχει διαθέσιμο ΚΟΥΙΖ με αυτό το PIN (Λάθος PIN ή πέρασε η ημερομηνία διάθεσης του ΚΟΥΙΖ)')));
         }
+
+
 
         return view('quiz.name', compact('quiz', 'pin'));
 
@@ -158,6 +165,7 @@ class QuizController extends Controller
         $validatedData = $request->validate([
             'mathquestion' => 'required|max:255',
             'mathanswer' => 'required|max:255',
+            'mathimage' =>'nullable|dimensions:max_width=1440,max_height:1440|mimes:jpeg,jpg,png,gif|max:800'
         ]);
 
         $math = new Math();
@@ -173,6 +181,14 @@ class QuizController extends Controller
         $math->personal = 1;
         $math->creator_user_id = $user->id;
         $math->updater_user_id = $user->id;
+
+        // save image if uplpoaded
+        if($request->mathimage != null) {
+            $fileName = "fileName_".uniqid()."_".time().'.'.$request->mathimage->getClientOriginalExtension();
+            $math->image_path = $fileName;
+            $request->mathimage->storeAs('pubimg', $fileName, 'mypublic');
+        }
+
         $math->save();
 
         $quiz->maths()->attach($math->id);
@@ -321,6 +337,7 @@ class QuizController extends Controller
         $validatedData = $request->validate([
             'mathquestion' => 'required|max:255',
             'mathanswer' => 'required|max:255',
+            'mathimage' =>'nullable|dimensions:max_width=1440,max_height:1440|mimes:jpeg,jpg,png,gif|max:800'
         ]);
 
         $math->question = $request->mathquestion;
@@ -329,7 +346,11 @@ class QuizController extends Controller
         $math->answer_alt2 = $request->mathanswer_alt2!=null?$request->mathanswer_alt2:null;
         $math->answer_alt3 = $request->mathanswer_alt3!=null?$request->mathanswer_alt3:null;
         $math->answer_alt4 = $request->mathanswer_alt4!=null?$request->mathanswer_alt4:null;
-
+        if($request->mathimage != null) {
+            $fileName = "fileName_".uniqid()."_".time().'.'.$request->mathimage->getClientOriginalExtension();
+            $math->image_path = $fileName;
+            $request->mathimage->storeAs('pubimg', $fileName, 'mypublic');
+        }
         $math->save();
 
         return redirect(route('quiz_questions', ['quiz'=>$quiz->id]));
@@ -431,7 +452,7 @@ class QuizController extends Controller
         }
         shuffle($wrong);
 
-        return response()->json(['question'=>$math->question, 'id'=>$math->id, 'answer' => $math->answer, 'wrong' => $wrong]);
+        return response()->json(['question'=>$math->question, 'id'=>$math->id, 'answer' => $math->answer, 'wrong' => $wrong, 'image_path' => $math->image_path]);
     }
 
     public function results($pin) {

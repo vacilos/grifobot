@@ -20,7 +20,7 @@
                 </ul>
             </div>
             @endif
-            <form method="post" action="{{ route('quiz_update_math', ['quiz'=>$quiz, 'math'=>$math]) }}" id="mathForm">
+            <form method="post" action="{{ route('quiz_update_math', ['quiz'=>$quiz, 'math'=>$math]) }}" id="mathForm" enctype="multipart/form-data">
                 @csrf
                 @method('patch')
                 <div class="form-group">
@@ -32,6 +32,11 @@
                     <textarea name="mathquestion" class="form-control" id="mathquestion" aria-describedby="mathquestionhelp" placeholder="Καταγραφή άσκησης π.χ. 5+3=">{{ $math->question }}</textarea>
                     <small id="mathquestionhelp" class="form-text text-muted">Καταγραφή άσκησης π.χ. 5+3. Για διαίρεση σύμβολο :, για πολλαπλασιασμό σύμβολο *, για ύψωση σε δύναμη σύμβολο ^. Για κλάσμα ακεραίων γράφετε 23/34. Για κλάσμα δεκαδικών χρησιμοποιείτε το κουμπί Κλάσμα πάνω από το πεδίο. Πατήστε προεπισκόπηση για να δείτε το τελικό αποτέλεσμα</small>
                     <small id="previewquestion"></small>
+                </div>
+                <div class="form-group">
+                    <label for="mathimage">Εικόνα</label>
+                    <input type="file" name="mathimage" class="form-control" id="mathimage" aria-describedby="mathimagehelp">
+                    <small id="mathimagehelp" class="form-text text-muted">Εικόνα ερώτησης (Μέγιστο ύψος: 1440px, μέγιστο πλάτος: 1440px, μέγιστο μέγεθος σε ΚΒ: 800ΚΒ</small>
                 </div>
                 <div class="form-group">
                     <label for="mathanswer">Απάντηση</label>
@@ -93,8 +98,6 @@
 @endsection
 
 @section('javascript')
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
     <script type="text/javascript">
 
     $(document).ready(function() {

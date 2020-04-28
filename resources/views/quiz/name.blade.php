@@ -19,8 +19,11 @@
                                 <small id="pinHelp" class="form-text text-muted">Γράψε το ψευδώνυμο που θέλεις να έχεις για το KOYIZ!</small>
                                 <input type="hidden" name="quiz" id="quiz" value="{{ $quiz->id }}" />
                             </div>
-                            <button type="submit" class="btn btn-success btn-lg manouri btn-block manouri-lg">Φύγαμε!</button>
-                            <br/><br/><a href="{{ route('quiz_results', ['pin'=>$quiz->pin]) }}" class="text-center">Αποτελέσματα</a>
+                            <button type="submit" class="btn btn-success btn-lg manouri btn-block manouri-lg"><i class="fa fa-rocket"></i> Φύγαμε!</button>
+                            <br/><br/>
+                            <div class="text-center">
+                                <a href="{{ route('quiz_results', ['pin'=>$quiz->pin]) }}" class="text-center"><i class="fa fa-bar-chart-o"></i> Αποτελέσματα</a>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -30,8 +33,6 @@
 @endsection
 
 @section('javascript')
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
     <script type="text/javascript">
 
         $(document).ready(function() {

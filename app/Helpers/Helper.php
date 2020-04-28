@@ -31,7 +31,7 @@ if(!function_exists('display_level')) {
         }
 
         if($level == 8) {
-            return "Α' Γυμνασίού";
+            return "Α' Γυμνασίου";
         }
 
         if($level == 9) {

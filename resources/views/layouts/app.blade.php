@@ -33,15 +33,25 @@
 
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="{{asset('bootstrap/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap&subset=greek" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">
 
     <style type="text/css">
+        body {
+            padding-bottom: 70px;
+            background-image: url('{{asset('images/robotback.jpg')}}') !important;
+            background-position:top left;
+            background-repeat: repeat;
+        }
         .f {
             display: inline-block;
             text-align: center;
@@ -80,10 +90,10 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-light shadow-lg">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Γριφο<span style="color:deeppink">μπότ</span>
+                    Γριφο<span style="color:firebrick">μπότ</span>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -123,8 +133,10 @@
                                 <a class="nav-link" href="{{ route('user_home') }}">Αρχική</a>
                             </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Γριφομπότ</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown02">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Γριφομπότ
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="nav-link" href="{{ route('about') }}">Τι είναι</a>
                                 <a class="nav-link" href="{{ route('quiz') }}">Γριφομπότ Κουίζ</a>
                                 <a class="nav-link" href="{{ route('help') }}">Οδηγίες</a>
@@ -183,20 +195,26 @@
         <main class="py-4">
             @yield('content')
         </main>
-        <footer class="text-center">
-            Application designed with <i class="fa fa-heart" style="color: red;"></i> by <a href="http://gav.uop.gr"><img src="{{ asset('images/gav.png') }}" style="max-width:20px;">ΓΑΒ LAB</a><br/>
 
-            <small>
-                <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.3 (deeppink)</a> | <a href="{{route('contact')}}">Επικοινωνία</a>
-                <br/>additional graphics designed by <a href="https://www.facebook.com/aggelakosPnM/" target="_blank">Yannis Aggelakos</a><br/>
-                Images for animal avatars by freepik (<a href="http://www.freepik.com">Designed by Freepik</a>)<br/>
-                tech support by <a href="http://osporos.com">O Sporos</a>
-                <br/>
-                @yield('footer')
-            </small>
-            <br/>
-            <div class="float-right" id="footer_msg" style="font-size: 5px;"></div>
-        </footer>
+    </div>
+    <div class="navbar fixed-bottom navbar-light bg-light">
+        <div class="row">
+            <div class="col-sm-12">
+                <div style="font-size: 10px" class="text-left">
+                    Application designed with <i class="fa fa-heart" style="color: red;"></i> by <a href="http://gav.uop.gr"><img src="{{ asset('images/gav.png') }}" style="max-width:20px;">ΓΑΒ LAB</a><br/>
+
+                    <a href="{{route('about')}}" target="_blank">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}" target="_blank">Οδηγίες</a> | <a href="{{route('version')}}" target="_blank">Έκδοση 1.4 (firebrick)</a> | <a href="{{route('contact')}}" target="_blank">Επικοινωνία</a> | <a href="{{route('credits')}}">Credits</a>
+                    <br/>
+                    @yield('footer')
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <div class="float-right" id="footer_msg" style="font-size: 5px;"></div>
     </div>
     @yield('javascript')
 </body>

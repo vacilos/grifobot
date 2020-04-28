@@ -70,7 +70,7 @@ class HomeController extends Controller
         $municipalStats = \DB::select( \DB::raw("SELECT sum(scores.score) as totalScore, count(distinct(user_id)) as totalUsers, municipalities.municipality as dimos FROM `scores` join users on scores.user_id=users.id join municipalities on users.municipality_id=municipalities.id group by users.municipality_id order by totalScore DESC, totalUsers DESC LIMIT 10"));
 
 
-        return view('welcome', compact('count', 'total', 'moves', 'answers', 'stats', 'stats7', 'municipalStats', 'hof', 'ava'));
+        return view('welcomehome', compact('count', 'total', 'moves', 'answers', 'stats', 'stats7', 'municipalStats', 'hof', 'ava'));
     }
 
     public function test() {

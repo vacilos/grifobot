@@ -18,7 +18,7 @@
                         <h2 class="manouri">Ελεύθερα ΚΟΥΙΖ</h2>
                     </div>
                     <div class="card-body">
-                        <a href="{{route('welcome')}}">Αρχική σελίδα</a>
+                        <a href="{{route('welcome')}}" class="btn btn-info btn-lg manouri"><i class="fa fa-home"></i> Αρχική</a><a href="{{route('quiz_play_start')}}" class="btn btn-lg btn-warning manouri"><i class="fa fa-code"></i> Έχω PIN</a>
                         <table class="table table-bordered table-striped manouri manouri-16 table-responsive-sm">
                             <thead>
                             <tr>
@@ -40,7 +40,7 @@
                                     @if($quiz->end_date == null) χωρίς λήξη @else{{ date('d-m-Y H:i', strtotime($quiz->end_date))}} @endif
                                 </td>
                                 <td class="manouri">
-                                    <a href="{{route('quiz_play_start', ['pin'=>$quiz->pin])}}" class="btn btn-info manouri">Παίξε</a>
+                                    <a href="{{route('quiz_play_start', ['pin'=>$quiz->pin])}}" class="btn btn-info manouri"><i class="fa fa-play"></i> Παίξε</a>
                                 </td>
                             </tr>
                         @endforeach

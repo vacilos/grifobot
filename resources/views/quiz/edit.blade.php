@@ -1,5 +1,7 @@
 @extends('layouts.app')
-
+@section('stylesheet')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+@endsection
 @section('content')
 
     <div class="container">
@@ -70,7 +72,12 @@
 
                     <div class="form-group">
                         <label for="quizdate">Ημ. Λήξης</label>
-                        <input type="text" name="quizdate" class="form-control" id="quizdate" aria-describedby="quizdatehelp" placeholder="π.χ. 2020-04-22 13:55:00" value="{{$quiz->end_date}}">
+                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                            <input name="quizdate" id="quizdate" type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1" value="{{$quiz->end_date}}"/>
+                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+                        </div>
                         <small id="quizdatehelp" class="form-text text-muted">Καταγράψτε την ημερομηνία λήξης του ΚΟΥΙΖ (κενό αν δεν έχει).</small>
                     </div>
                     <button type="submit" class="btn btn-success">Υποβολή</button> <a href="{{route('quiz_my')}}" class="btn btn-default">Επιστροφή</a>
@@ -79,4 +86,21 @@
         </div>
     </div>
 
+@endsection
+
+@section('javascript')
+
+    <script src="{{ asset('dt/moment.min.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                    'format': 'YYYY-MM-DD HH:mm'
+                });
+            });
+        });
+
+
+    </script>
 @endsection

@@ -68,12 +68,12 @@
                         <button id="bu" onclick="selectedAction('U');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-up"></i></button>
                         <button id="bd" onclick="selectedAction('D');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-down"></i></button>
 
-                    <h4>Κινήσεις</h4>
+                    <h4>Κινήσεις  <button id="bdel" onclick="clearMoves();" class="btn btn-danger float-right"><i class="fa fa-trash"></i></button>
+                    </h4>
                     <span id="moves" style="font-size:26px;">
 
                     </span>
                     <button id="bgo" onclick="go();" class="btn btn-lg btn-block btn-success"><i class="fa fa-play"></i> Ξεκίνα</button>
-                    <button id="bdel" onclick="clearMoves();" class="btn btn-danger float-right"><i class="fa fa-trash"></i></button>
 
                     <hr style="clear:both;"/>
                     <h4>ΣΚΟΡ: <span id="score">0</span></h4>
@@ -310,8 +310,6 @@
 @endsection
 
 @section('javascript')
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
     <script type="text/javascript">
         $(document).ready(function() {
             disableArrows();
@@ -387,6 +385,7 @@
         }
 
         function go() {
+            solvingEquation = 0;
             disableArrows();
 
             if(moves.length == 0) {
@@ -398,8 +397,12 @@
 
         function printCounter() {
             if(collision == 1) {
+                $("#incorrectPlaceModal").modal('show');
+                $('#pos'+currentQuestion).css('background-color', 'white');
+                currentQuestion = -10;
                 clearMoves();
                 checkEndGame();
+
             } else {
                 movePlayer(moves[counter], counter);
                 counter++;
@@ -476,6 +479,10 @@
         }
 
         function mathClicked(mathId, eq) {
+            if(solvingEquation == 1) {
+                alert('Λύνεις ακόμα κάποια άσκηση! Μετακινήσου με τα βελάκια πριν πας σε επόμενη!')
+                return false;
+            }
             solvingEquation = 1;
             currentQuestion = eq;
             completedQuestions++;
@@ -603,6 +610,7 @@
                 enableArrows();
 
             } else {
+                solvingEquation = 0;
                 // remove the current question
                 $("#failModal").modal('show');
                 checkEndGame();

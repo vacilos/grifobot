@@ -18,7 +18,7 @@
                         <h2 class="manouri">Αποτελέσματα: {{ $quiz->name }}</h2>
                     </div>
                     <div class="card-body">
-                        <a href="{{route('welcome')}}">Αρχική σελίδα</a>
+                        <a href="{{route('welcome')}}" class="btn btn-info"><i class="fa fa-home"></i> Αρχική σελίδα</a>
                         <table class="table table-bordered table-striped manouri manouri-16 table-responsive-sm">
                             <thead>
                             <tr>

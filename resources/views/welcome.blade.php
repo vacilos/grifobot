@@ -28,13 +28,16 @@
     <meta name=”twitter:image” content=”http://grifobot.gr”>
     <link rel="icon" href="{{ asset('images/favicon.ico') }}">
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+{{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
+    <script src="{{asset('bootstrap/bootstrap.bundle.min.js')}}"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap&subset=greek" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Fonts -->
     <!-- Styles -->
     <style>
@@ -131,9 +134,6 @@
                         Βρείτε στο ακόλουθο ελεύθερα ΚΟΥΙΖ <br/><a href="{{route('quiz_public')}}" class="btn btn-lg btn-danger">Γριφομπότ ΚΟΥΙΖ!</a>
                     </div>
 
-{{--                    <h5>--}}
-{{--                        Μέχρι σήμερα έχουν παιχτεί <b style="color:red;">{{ number_format($count, 0, ',','.') }}</b> παιχνίδια, έχουν απαντηθεί σωστά <b style="color: green">{{ number_format($answers, 0, ',','.') }}</b> ασκήσεις, έχουν γίνει <b style="color: blue;">{{ number_format($moves, 0, ',','.') }}</b> κινήσεις με συνολικό σκορ <b style="color: magenta">{{ number_format($total, 0, ',','.') }}</b>.--}}
-{{--                    </h5>--}}
 
                     <div class="fb-like m-b-md" data-href="https://facebook.com/grifobot" data-width="480" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
                 </div>
@@ -223,14 +223,6 @@
 
             </div>
 
-{{--            <div class="row" style="padding-top:20px;">--}}
-{{--                <div class="col-sm-12">--}}
-{{--                    <div class="alert alert-danger" role="alert">--}}
-{{--                        ΣΗΜΑΝΤΙΚΟ! Χρειαζόμαστε τις ιδέες σου. Πάτα <a href="{{ route('logo') }}" class="btn btn-info btn-sm">εδώ</a> για να δεις<br/>--}}
-{{--                        ή δες <a href="{{ route('students') }}" class="btn btn-info btn-sm">εδώ</a> τις ιδέες των παιδιών για το Γριφομπότ--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
             <div class="row">
                 <div class="col-sm-12">
                     <div style="font-size:18px;">

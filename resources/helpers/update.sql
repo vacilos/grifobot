@@ -67,3 +67,7 @@ alter table `quiz_scores` add constraint `quiz_scores_quiz_id_foreign` foreign k
 
 alter table `quizzes` add `end_date` datetime null;
 alter table `quizzes` add `public` tinyint(1) not null default '0';
+
+
+-- update 26.4.2020
+alter table `maths` add `image_path` varchar(1024) null;

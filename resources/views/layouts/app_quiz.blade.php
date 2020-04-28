@@ -31,12 +31,22 @@
     <meta name=”twitter:image” content=”http://grifobot.gr”>
     <link rel="icon" href="{{ asset('images/favicon.ico') }}">
 
+    <!-- Scripts -->
+    {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+    <script src="{{asset('bootstrap/bootstrap.bundle.min.js')}}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap&subset=greek" rel="stylesheet">
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap&subset=greek" rel="stylesheet">
 
     <style type="text/css">
         body {

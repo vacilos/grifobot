@@ -80,12 +80,12 @@
                         <button id="bu" onclick="selectedAction('U');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-up"></i></button>
                         <button id="bd" onclick="selectedAction('D');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-down"></i></button>
 
-                    <h4 class="manouri">Κινήσεις</h4>
+                    <h4 class="manouri">Κινήσεις <button id="bdel" onclick="clearMoves();" class="btn btn-danger float-right"><i class="fa fa-trash"></i></button></h4>
                     <span id="moves" style="font-size:26px;">
 
                     </span>
                     <button id="bgo" onclick="go();" class="btn btn-lg btn-block btn-success manouri"> Ξεκίνα &nbsp;<i class="fa fa-play"></i></button>
-                    <button id="bdel" onclick="clearMoves();" class="btn btn-danger float-right"><i class="fa fa-trash"></i></button>
+
 
                     <hr style="clear:both;"/>
                     <h4 class="manouri">ΣΚΟΡ: <span id="score">0</span></h4>
@@ -128,9 +128,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="modalbutton" onclick="javascript:submitModal();">Πάμε!</button>
                 </div>
             </div>
         </div>
@@ -267,9 +264,6 @@
 @endsection
 
 @section('javascript')
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -349,17 +343,44 @@
         }
 
         function go() {
+            solvingEquation = 0;
             disableArrows();
 
-            if(moves.length == 0) {
+            //check if the user is already at the correct place
+            if(player == currentQuestion && moves.length == 0) {
+                var currentMoves = 0;
+                totalmoves += 0;
+                score += 100;
+
+                $('#currentMoves').html(currentMoves);
+                $("#currentPoints").html(100);
+                submitScore(score, quiz, username, totalmoves);
+                $("#score").html(score);
+                $("#correctPlaceModal").modal('show');
+                // $('#pos'+currentQuestion).empty();
+                $("#target").remove();
+                currentQuestion = -10;
+            } else if(moves.length == 0) {
                 collision = 1;
+                $("#incorrectPlaceModal").modal('show');
+                // $('#pos'+currentQuestion).empty();
+                $("#target").remove();
+                currentQuestion = -10;
+                clearMoves();
+                checkEndGame();
+            } else {
+                printCounter();
             }
 
-            printCounter();
+
         }
 
         function printCounter() {
             if(collision == 1) {
+                $("#incorrectPlaceModal").modal('show');
+                // $('#pos'+currentQuestion).empty();
+                $("#target").remove();
+                currentQuestion = -10;
                 clearMoves();
                 checkEndGame();
             } else {
@@ -380,6 +401,7 @@
                         $("#correctPlaceModal").modal('show');
                         // $('#pos'+currentQuestion).empty();
                         $("#target").remove();
+                        currentQuestion = -10;
                     } else {
                         $("#incorrectPlaceModal").modal('show');
                         // $('#pos'+currentQuestion).empty();
@@ -440,6 +462,10 @@
         }
 
         function mathClicked(mathId, eq) {
+            if(solvingEquation == 1) {
+                alert('Λύνεις ακόμα κάποια άσκηση! Μετακινήσου με τα βελάκια πριν πας σε επόμενη!')
+                return false;
+            }
             solvingEquation = 1;
             currentQuestion = eq;
             completedQuestions++;
@@ -473,7 +499,14 @@
                         $('#answerinmodal').show();
                         $('#multiplechoiceinmodal').hide();
                     }
-                    $("#modalquestion").html(data.question);
+                    if(data.image_path == null) {
+                        $("#modalquestion").html(data.question);
+                    } else {
+                        var elquestion = "<p>"+data.question+"</p><p><img src='{{asset("pubimg/pubimg")}}/"+data.image_path+"' class='img-fluid' style='max-width:600px;max-height:600px;'/></p>";
+                        $("#modalquestion").html(elquestion);
+                    }
+
+
                     $('#exampleModal').modal({
                         keyboard: false,
                         backdrop: 'static',
@@ -535,6 +568,7 @@
                 enableArrows();
 
             } else {
+                solvingEquation = 0;
                 // remove the current question
                 $("#failModal").modal('show');
                 checkEndGame();
@@ -595,5 +629,5 @@
 @endsection
 
 @section('footer')
-    <a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by Layerace - www.freepik.com</a> | <a href="https://www.freepik.com/free-photos-vectors/business">Business vector created by macrovector_official - www.freepik.com</a>
+
 @endsection

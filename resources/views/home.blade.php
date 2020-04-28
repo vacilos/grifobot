@@ -39,6 +39,8 @@
                                 <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 1]) }}" class="btn btn-success btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ απλό</a>
                                 <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 2]) }}" class="btn btn-warning btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ μέτριο</a>
                                 <a href="{{ route('start_plan_kinder', ['size'=> 4, 'level' => Auth::user()->level, 'diff' => 3]) }}" class="btn btn-danger btn-lg btn-block"><i class="fa fa-play-circle"></i> ΠΑΙΞΕ δύσκολο</a>
+                            @elseif(Auth::user()->level > 7)
+                                Δεν υπάρχουν ακόμα ελεύθερα ταμπλό για τάξεις Γυμνασίου και Λυκείου. Μπορείτε να δείτε τα ΚΟΥΙΖ για να δείτε αν υπάρχει κάποιο ελεύθερο διαθέσιμο!
                             @else
                                 <a href="{{ route('start_plan_ex', ['size'=> 6, 'level' => Auth::user()->level]) }}" class="btn btn-success btn-lg btn-block"><br/><i class="fa fa-play-circle"></i> ΠΑΙΞΕ ΤΩΡΑ<Br/><br/></a>
                                 <small>Παίξε στο ελεύθερο παιχνίδι μία πίστα και στη συνέχεια προσκάλεσε φίλους σου να δεις αν μπορούν να φτάσουν στο σκορ σου!</small>
@@ -252,7 +254,6 @@
 @endsection
 
 @section('javascript')
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {
