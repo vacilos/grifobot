@@ -38,9 +38,26 @@ class QuizController extends Controller
             return redirect(route('quiz_play_start', array('pin'=>$pin, 'message'=>'Δεν υπάρχει διαθέσιμο ΚΟΥΙΖ με αυτό το PIN (Λάθος PIN ή πέρασε η ημερομηνία διάθεσης του ΚΟΥΙΖ)')));
         }
 
-
-
         return view('quiz.name', compact('quiz', 'pin'));
+
+    }
+    public function playNameRevolution(Request $request) {
+//        $pin = $request->pin;
+//        $currentDate = new \DateTime();
+//
+//        $formattedDate = $currentDate->format("Y-m-d H:i:s");
+//
+//        $quiz = Quiz::where('pin', '=',$pin)->where( function ($query) use ($formattedDate) {
+//            $query->whereNull('end_date')->orWhere('end_date', '>=', $formattedDate);
+//        })->first();
+//
+//        if($quiz == null) {
+//            return redirect(route('quiz_play_start', array('pin'=>$pin, 'message'=>'Δεν υπάρχει διαθέσιμο ΚΟΥΙΖ με αυτό το PIN (Λάθος PIN ή πέρασε η ημερομηνία διάθεσης του ΚΟΥΙΖ)')));
+//        }
+        $quiz = Quiz::find(15);
+
+
+        return view('revolution.name', compact('quiz'));
 
     }
 
@@ -93,8 +110,59 @@ class QuizController extends Controller
         $quizScore->questions = 0;
         $quizScore->save();
 
-        //
         return view('quiz.play', compact('pattern', 'size', 'blocked', 'quiz', 'questions', 'username'));
+    }
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Plan  $plan
+     * @return \Illuminate\Http\Response
+     */
+    public function playRevolution(Request $request)
+    {
+        $username = $request->username;
+        $quizId = $request->quiz;
+
+        $quiz = Quiz::find($quizId);
+
+        if($quiz == null) {
+            return redirect(route('quiz_play_start_revolution', array('message'=>'Παρουσιάστηκε πρόβλημα με το ΚΟΥΙΖ')));
+        }
+
+        // find scores with that username!
+        $existing = QuizScore::where('username', $username)->where('quiz_id', $quiz->id)->first();
+        if($existing != null) {
+            return redirect(route('quiz_play_start_revolution', array('pin'=>$quiz->pin, 'message'=>'Υπάρχει ήδη παίκτης με αυτό το όνομα')));
+        }
+
+
+        $pattern = $quiz->code;
+        $pattern = json_decode($pattern);
+
+        $size = $quiz->size;
+        $level = $quiz->level;
+        $blocked = array();
+        $questions = array();
+        foreach($pattern as $pat) {
+            if($pat->blocked == true) {
+                array_push($blocked, $pat->id);
+            }
+            if($pat->math == true) {
+                array_push($questions, $pat->id);
+            }
+        }
+        // create a zero score
+        $quizScore = new QuizScore();
+        $quizScore->quiz_id = $quiz->id;
+        $quizScore->username = $username;
+        $quizScore->score = 0;
+        $quizScore->movements = 0;
+        $quizScore->questions = 0;
+        $quizScore->save();
+
+        return view('revolution.play', compact('pattern', 'size', 'blocked', 'quiz', 'questions', 'username'));
     }
 
     public function myQuizzes() {
@@ -176,6 +244,7 @@ class QuizController extends Controller
         $math->answer_alt2 = $request->mathanswer_alt2!=null?$request->mathanswer_alt2:null;
         $math->answer_alt3 = $request->mathanswer_alt3!=null?$request->mathanswer_alt3:null;
         $math->answer_alt4 = $request->mathanswer_alt4!=null?$request->mathanswer_alt4:null;
+        $math->story = $request->mathstory!=null?$request->mathstory:null;
 
         $math->category_id = 1;
         $math->personal = 1;
@@ -452,7 +521,7 @@ class QuizController extends Controller
         }
         shuffle($wrong);
 
-        return response()->json(['question'=>$math->question, 'id'=>$math->id, 'answer' => $math->answer, 'wrong' => $wrong, 'image_path' => $math->image_path]);
+        return response()->json(['question'=>$math->question, 'id'=>$math->id, 'answer' => $math->answer, 'wrong' => $wrong, 'image_path' => $math->image_path, 'story' => $math->story] );
     }
 
     public function results($pin) {
@@ -496,7 +565,15 @@ class QuizController extends Controller
         })->get();
 
         return view('quiz.public', compact('quizzes'));
+    }
+    public function publicQuizRevolution() {
+//        $currentDate = new \DateTime();
+//        $formattedDate = $currentDate->format("Y-m-d H:i:s");
+//
+//        $quizzes = Quiz::where('public', 1)->where( function ($query) use ($formattedDate) {
+//            $query->whereNull('end_date')->orWhere('end_date', '>=', $formattedDate);
+//        })->get();
 
-
+        return view('revolution.public', compact('quizzes'));
     }
 }

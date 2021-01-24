@@ -52,6 +52,17 @@ Route::get('/students', function () {
     return view('students');
 })->name('students');
 
+Route::group(['prefix' => '1821'], function() {
+    Route::get('/main', function () { return view('revolution.main'); })->name('1821');
+    Route::get('/quiz/start', function () {    return view('quiz.start');})->name('quiz_play_start_revolution');
+    Route::get('/quiz/play/name', 'QuizController@playNameRevolution')->name('quiz_play_name_revolution');
+    Route::post('/quiz/play', 'QuizController@playRevolution')->name('quiz_play_revolution');
+    Route::post('/quiz/question', 'QuizController@questionRevolution')->name('quiz_question_revolution');
+    Route::post('/quiz/recordScore', 'QuizScoreController@recordRevolution')->name('quiz_score_record_revolution');
+    Route::get('/quiz/public', 'QuizController@publicQuizRevolution')->name('quiz_public_revolution');
+    Route::get('/quiz/{pin}/results', 'QuizController@resultsRevolution')->name('quiz_results_revolution');
+}); // routes for revolution version adding quizzes
+
 Route::get('/quiz/start', function () {    return view('quiz.start');})->name('quiz_play_start');
 Route::post('/quiz/play/name', 'QuizController@playName')->name('quiz_play_name');
 Route::post('/quiz/play', 'QuizController@play')->name('quiz_play');
@@ -64,6 +75,13 @@ Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['prefix' => 'revolution', 'middleware' => ['role:admin', 'auth']], function() {
+    Route::get('/revolution/quiz/my', 'QuizController@myQuizzesRevolution')->name('revolution_quiz_my');
+    Route::get('revolution/quiz/create/start', 'QuizController@createRevolution')->name('revolution_quiz_start');
+    Route::post('revolution/quiz/create/store', 'QuizController@storeRevolution')->name('revolution_quiz_store');
+    Route::get('revolution/quiz/{quiz}/add/{question}/question', 'QuizController@addQuestionRevolution')->name('revolution_quiz_add_question');
+    Route::post('revolution/quiz/{quiz}/store/{question}/question', 'QuizController@storeQuestionRevolution')->name('revolution_quiz_store_question');
+}); // routes for revolution version adding quizzes
 
 Route::group(['prefix' => 'teacher', 'middleware' => ['role:teacher|admin', 'auth']], function() {
     Route::get('/quiz/my', 'QuizController@myQuizzes')->name('quiz_my');
@@ -128,3 +146,4 @@ Route::group(['prefix' => 'user', 'middleware' => 'auth'], function() {
     Route::get('/plan/{plan}/details', 'PlanController@planDetails')->name('plan_details');
     Route::post('/challenge/friend', 'ChallengeController@challengeFriend')->name('challenge_friend');
 });
+
