@@ -24,6 +24,8 @@ class CreateQuizzesTable extends Migration
             $table->string('pin', 10);
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('town_id')->unsigned();
+            $table->foreign('town_id')->references('id')->on('towns')->onDelete('cascade');
             $table->timestamps();
         });
     }

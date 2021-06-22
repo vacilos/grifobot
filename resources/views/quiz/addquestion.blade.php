@@ -66,11 +66,6 @@
                     <small id="mathanswer_alt4help" class="form-text text-muted">Σε περιπτώσεις πολλαπλής επιλογής γράφετε μία "λάθος" απάντηση.</small>
                 </div>
 
-                <div class="form-group">
-                    <label for="mathstory">Ιστορία</label><br/>
-                    <textarea name="mathstory" class="form-control" id="mathstory" aria-describedby="mathstoryhelp" placeholder="Καταγραφή ιστορίας"></textarea>
-                    <small id="mathstoryhelp" class="form-text text-muted">Καταγραφή της ιστορίας που σχετίζεται με την ερώτηση</small>
-                </div>
 
                 <button type="submit" class="btn btn-success">Δημιουργία</button> <a href="{{route('maths.index')}}" class="btn btn-default">Επιστροφή</a>
             </form>

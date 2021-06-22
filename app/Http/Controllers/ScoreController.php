@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Math;
 use App\Score;
 use App\Plan;
-use App\User;
+use App\Person;
 use Auth;
 use Illuminate\Http\Request;
 
@@ -88,30 +88,32 @@ class ScoreController extends Controller
     }
 
     public function recordScore(Request $request) {
+
         $plan = $request->plan;
-        $user = $request->userId;
         $score = $request->score;
         $movements = $request->movements;
+        $userId = $request->userId;
 
         $planObj = Plan::find($plan);
         if($planObj == null) {
             return response()->json(['answer' => "Δε βρέθηκε το πλάνο"]);
         }
-        $userObj = User::find($user);
-        if($userObj == null || $userObj->id != Auth::user()->id) {
+        $userObj = Person::find($userId);
+        if($userObj == null) {
             return response()->json(['answer' => "Δε βρέθηκε ο χρήστης"]);
         }
 
-        $existingScore = Score::where('user_id', $userObj->id)->where('plan_id', $planObj->id)->first();
+        $existingScore = Score::where('person_id', $userObj->id)->where('plan_id', $planObj->id)->first();
 
         if($existingScore == null) {
             $existingScore = new Score();
-            $existingScore->user_id = $userObj->id;
+            $existingScore->person_id = $userObj->id;
             $existingScore->plan_id = $planObj->id;
             $existingScore->total = 0;
+            $existingScore->level = $planObj->level;
         }
 
-        if($score > 900 || $score < 0) {
+        if($score > 2000 || $score < 0) {
             return response()->json(['answer' => "Προσπάθεια κλοπής"]);
         }
         $existingScore->score = $score;

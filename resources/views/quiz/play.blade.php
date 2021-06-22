@@ -61,7 +61,7 @@
     <div class="container-fluid" style="padding:20px; background-color:#efefef;">
         <div class="row justify-content-center">
             <div class="col-8">
-                <h3 class="manouri">{{ $quiz->name }}</h3>
+                <h3 class="manouri"></h3>
                 <main class="grid" id="first-show">
                     @foreach($pattern as $pat)
                         <b id="pos{{$pat->id}}" @if($pat->blocked == true)style="background-image: url({{ asset('images/bomb.jpg') }}) !important; background-size:cover"@endif>
@@ -73,7 +73,7 @@
             </div>
             <div class="col-4">
                 <div class="sticky-top" id="second-show">
-                    <h2 class="text-center manouri">{{$username}}</h2>
+                    <h2 class="text-center manouri"></h2>
 
                         <button id="bl" onclick="selectedAction('L');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-left"></i></button>
                         <button id="br" onclick="selectedAction('R');" class="btn  btn-info btn-lg"><i class="fa fa-arrow-right"></i></button>
@@ -91,7 +91,7 @@
                     <h4 class="manouri">ΣΚΟΡ: <span id="score">0</span></h4>
                     <hr/>
                     <p class="manouri">
-                        {{ $quiz->description }} ({{ display_level($quiz->level) }})
+
                     </p>
                 </div>
             </div>
@@ -154,7 +154,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ route('quiz_results', ['pin' => $quiz->pin, 'username'=> $username]) }}" class="btn btn-warning">Αποτελέσματα</a>
+
                 </div>
             </div>
         </div>
@@ -291,8 +291,8 @@
         var todo = 0;
         var score = 0;
         var totalscore = 0;
-        var quiz = {{ $quiz->id }};
-        var username = "{{ $username }}";
+
+
         var totalQuestions = {{ sizeof($questions) }};
         var completedQuestions = 0;
 

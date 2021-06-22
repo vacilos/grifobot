@@ -5,13 +5,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Λίστα Ασκήσεων</h1>
-                <a href="{{ route('maths.create') }}" class="btn btn-success">Δημιουργία Άσκησης</a>
+                <h1>Λίστα ΚΟΥΙΖ</h1>
+                <a href="{{ route('quiz.create') }}" class="btn btn-success">Δημιουργία Κουιζ</a>
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
                             <th>
-                                Άσκηση / Απάντηση
+                                Κουίζ
                             </th>
                             <th>
                                 Επίπεδο
@@ -22,16 +22,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($maths as $math)
+                    @foreach($quizzes as $quiz)
                         <tr>
                             <td>
-                                {{$math->question}} => {{$math->answer}}
+                                {{$quiz->name}}
                             </td>
                             <td>
-                                {{ display_level($math->level) }}
-                            </td>
-                            <td>
-                                <a href="{{route('maths.edit', ['math' => $math->id])}}" class="btn btn-sm btn-info">Επεξεργασία</a>
+
                             </td>
                         </tr>
                     @endforeach
@@ -39,7 +36,6 @@
 
                     </tbody>
                 </table>
-                {{ $maths->links() }}
             </div>
         </div>
     </div>

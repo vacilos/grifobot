@@ -12,8 +12,7 @@ class Plan extends Model
         return $this->hasMany(Score::class);
     }
 
-    public function tournaments() {
-        return $this->belongsToMany(Tournament::class, 'tournament_plans')->withPivot('order')->withTimestamps();
-
+    public function town() {
+        return $this->belongsTo(Town::class);
     }
 }

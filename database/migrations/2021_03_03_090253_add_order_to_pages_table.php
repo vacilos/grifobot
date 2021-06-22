@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImageToMathsTable extends Migration
+class AddOrderToPagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AddImageToMathsTable extends Migration
      */
     public function up()
     {
-        Schema::table('maths', function (Blueprint $table) {
+        Schema::table('pages', function (Blueprint $table) {
             //
-            $table->string("image_path", 1024)->nullable();
-
+            $table->smallInteger('order')->nullable();
         });
     }
 
@@ -27,7 +26,7 @@ class AddImageToMathsTable extends Migration
      */
     public function down()
     {
-        Schema::table('maths', function (Blueprint $table) {
+        Schema::table('pages', function (Blueprint $table) {
             //
         });
     }

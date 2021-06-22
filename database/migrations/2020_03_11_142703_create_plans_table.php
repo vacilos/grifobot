@@ -16,8 +16,9 @@ class CreatePlansTable extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->smallInteger('size');
-            $table->smallInteger('level');
             $table->longText('code');
+            $table->bigInteger('town_id')->unsigned();
+            $table->foreign('town_id')->references('id')->on('towns');
             $table->timestamps();
         });
     }

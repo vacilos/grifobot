@@ -71,3 +71,13 @@ alter table `quizzes` add `public` tinyint(1) not null default '0';
 
 -- update 26.4.2020
 alter table `maths` add `image_path` varchar(1024) null;
+
+alter table `maths` add `story` text null;
+
+create table `towns` (`id` bigint unsigned not null auto_increment primary key, `name` varchar(255) not null, `title` varchar(255) not null, `info` text not null, `slug` varchar(255) not null, `logo` varchar(255) null, `background` varchar(255) null, `css` text null, `game_background` varchar(255) null, `game_player` varchar(255) null, `game_question` varchar(255) null, `game_obstacle` varchar(255) null, `municipality_id` bigint unsigned null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci';
+alter table `towns` add constraint `towns_municipality_id_foreign` foreign key (`municipality_id`) references `municipalities` (`id`);
+alter table `towns` add unique `towns_slug_unique`(`slug`);
+
+create table `pages` (`id` bigint unsigned not null auto_increment primary key, `title` varchar(255) not null, `slug` varchar(255) not null, `description` text not null, `image` varchar(255) null, `town_id` bigint unsigned null, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci';
+alter table `pages` add constraint `pages_town_id_foreign` foreign key (`town_id`) references `towns` (`id`);
+alter table `pages` add unique `pages_slug_unique`(`slug`);

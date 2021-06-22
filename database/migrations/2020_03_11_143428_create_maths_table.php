@@ -16,10 +16,25 @@ class CreateMathsTable extends Migration
         Schema::create('maths', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->smallInteger('level');
-            $table->string('question', 255);
+            $table->text('question');
             $table->string('answer', 255);
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
+
+            $table->string('answer_alt1', 255)->nullable()->default(null);
+            $table->string('answer_alt2', 255)->nullable()->default(null);
+            $table->string('answer_alt3', 255)->nullable()->default(null);
+            $table->string('answer_alt4', 255)->nullable()->default(null);
+
+            $table->unsignedBigInteger('creator_user_id')->default(1)->nullable();
+            $table->foreign('creator_user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('updater_user_id')->default(1)->nullable();
+            $table->foreign('updater_user_id')->references('id')->on('users');
+
+            $table->text("story")->nullable();
+
+            $table->string("image_path", 1024)->nullable();
+
+            $table->unsignedBigInteger('town_id')->nullable();
+            $table->foreign('town_id')->references('id')->on('towns');
             $table->timestamps();
         });
     }

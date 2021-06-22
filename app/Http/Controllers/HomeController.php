@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Score;
+use App\Town;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -26,51 +27,7 @@ class HomeController extends Controller
      */
     public function welcome()
     {
-
-        $dateTime = new \DateTime('-1 day');
-        $compareDate = $dateTime->format("Y-m-d H:i:s");
-        $stats = Score::selectRaw('sum(score) as totalScore, users.avatar as avatar, users.name as username')
-            ->join('users', 'users.id', '=', 'scores.user_id')
-            ->where('scores.updated_at', '>', $compareDate)
-            ->groupBy('users.name')
-            ->orderBy('totalScore', 'desc')
-            ->take(10)
-            ->get();
-
-        $dateTime7 = new \DateTime('-7 days');
-        $compareDate7 = $dateTime7->format("Y-m-d H:i:s");
-        $stats7 = Score::selectRaw('sum(score) as totalScore, users.avatar as avatar, users.name as username')
-            ->join('users', 'users.id', '=', 'scores.user_id')
-            ->where('scores.updated_at', '>', $compareDate7)
-            ->groupBy('users.name')
-            ->orderBy('totalScore', 'desc')
-            ->take(10)
-            ->get();
-
-        $hof = Score::selectRaw('sum(score) as totalScore, users.avatar as avatar, users.name as username')
-            ->join('users', 'users.id', '=', 'scores.user_id')
-            ->groupBy('users.name')
-            ->orderBy('totalScore', 'desc')
-            ->take(10)
-            ->get();
-
-
-
-        $scores = Score::all();
-        $total = 0;
-        $moves = 0;
-        $answers = 0;
-        $count = sizeof($scores);
-        foreach($scores as $score) {
-            $total += $score->score;
-            $moves += $score->movements;
-            $answers += intval($score->total);
-        }
-
-        $municipalStats = \DB::select( \DB::raw("SELECT sum(scores.score) as totalScore, count(distinct(user_id)) as totalUsers, municipalities.municipality as dimos FROM `scores` join users on scores.user_id=users.id join municipalities on users.municipality_id=municipalities.id group by users.municipality_id order by totalScore DESC, totalUsers DESC LIMIT 10"));
-
-
-        return view('welcomehome', compact('count', 'total', 'moves', 'answers', 'stats', 'stats7', 'municipalStats', 'hof', 'ava'));
+        return view('welcome');
     }
 
     public function test() {
@@ -98,6 +55,19 @@ class HomeController extends Controller
         $number = preg_replace($pattern, $replace, $number);
 
         return view('test');
+    }
+
+    public function townWelcome($town) {
+
+        $town = Town::where('slug', $town)->first();
+
+        return view('revolution.'.$town->slug, compact('town'));
+    }
+    public function townAbout($town) {
+
+        $town = Town::where('slug', $town)->first();
+
+        return view('revolution.about', compact('town'));
     }
 
 }

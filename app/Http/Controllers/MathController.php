@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Act;
+use App\Town;
 use App\Math;
 use App\Category;
 use Illuminate\Http\Request;
@@ -79,9 +80,9 @@ class MathController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $towns = Town::all();
         //
-        return view('math.create', compact('categories'));
+        return view('math.create', compact( 'towns'));
     }
 
     /**
@@ -95,7 +96,6 @@ class MathController extends Controller
         $user = Auth::user();
         //
         $validatedData = $request->validate([
-            'category' => 'required',
             'mathlevel' => 'required',
             'mathquestion' => 'required|max:255',
             'mathanswer' => 'required|max:255',
@@ -109,7 +109,11 @@ class MathController extends Controller
         $math->answer_alt2 = $request->mathanswer_alt2!=null?$request->mathanswer_alt2:null;
         $math->answer_alt3 = $request->mathanswer_alt3!=null?$request->mathanswer_alt3:null;
         $math->answer_alt4 = $request->mathanswer_alt4!=null?$request->mathanswer_alt4:null;
-        $math->category_id = $request->category;
+        $math->story = $request->mathstory;
+        if($request->mathtown != 0) {
+            $math->town_id = $request->mathtown;
+        }
+
         $math->creator_user_id = $user->id;
         $math->updater_user_id = $user->id;
         $math->save();
@@ -137,9 +141,8 @@ class MathController extends Controller
     public function edit(Math $math)
     {
         //
-        $categories = Category::all();
-
-        return view('math.edit', compact('categories', 'math'));
+        $towns = Town::all();
+        return view('math.edit', compact( 'math', 'towns'));
     }
 
     /**
@@ -154,7 +157,6 @@ class MathController extends Controller
         $user = Auth::user();
         //
         $validatedData = $request->validate([
-            'category' => 'required',
             'mathlevel' => 'required',
             'mathquestion' => 'required|max:255',
             'mathanswer' => 'required|max:255',
@@ -167,7 +169,10 @@ class MathController extends Controller
         $math->answer_alt2 = $request->mathanswer_alt2!=null?$request->mathanswer_alt2:null;
         $math->answer_alt3 = $request->mathanswer_alt3!=null?$request->mathanswer_alt3:null;
         $math->answer_alt4 = $request->mathanswer_alt4!=null?$request->mathanswer_alt4:null;
-        $math->category_id = $request->category;
+        $math->story = $request->mathstory;
+        if($request->mathtown != 0) {
+            $math->town_id = $request->mathtown;
+        }
         $math->updater_user_id = $user->id;
         $math->save();
 

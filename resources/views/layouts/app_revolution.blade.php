@@ -34,12 +34,12 @@
     <!-- Scripts -->
     {{--    <script src="{{ asset('js/app.js') }}" defer></script>--}}
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
     <script src="{{asset('bootstrap/bootstrap.bundle.min.js')}}"></script>
 
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap&subset=greek" rel="stylesheet">
     <!-- Styles -->
     {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">
@@ -116,26 +116,22 @@
         }
 
         .background-greece {
-            background: repeating-linear-gradient(
-                12deg,
-                rgba(176, 181, 212, 0.15),
-                rgba(176, 181, 212, 0.15) 50px,
-                rgba(45, 70, 203, 0.15) 50px,
-                rgba(45, 70, 203, 0.15) 100px
-            );
+            background-image: url("{{asset('images/map.jpg')}}");
+            background-repeat: repeat;
         }
 
     </style>
-    <link rel="stylesheet" href="{{ asset('fa/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fa5/css/all.css') }}">
 
     @yield('stylesheet')
 </head>
 <body class="background-greece">
     <div id="app">
+        @yield('abovetitle')
         <div class="container-fluid">
-            <div class="row mt-lg-5">
+            <div class="row mt-md-1">
                 <div class="col-sm-12 text-center">
-                    <h1 class="manouri manouri-xl manouri-color manouri-shadow"><img src="https://www.messini.gr/images/logo.png" />Δήμος Μεσσήνης - Επανάσταση Γριφο<span style="color:firebrick">μπότ</span> </h1>
+                    <h3 class="manouri manouri-lg manouri-color manouri-shadow">@yield('pagetitle')</h3>
                 </div>
             </div>
         </div>
@@ -148,13 +144,10 @@
         <div class="row">
             <div class="col-sm-12">
                 <div style="font-size: 10px" class="text-left">
-                    Application designed with <i class="fa fa-heart" style="color: red;"></i> by <a href="http://gav.uop.gr"><img src="{{ asset('images/gav.png') }}" style="max-width:20px;">ΓΑΒ LAB</a><br/>
+                    Application designed with <i class="fa fa-heart" style="color: red;"></i> by <a href="http://gav.uop.gr" target="_blank"><img src="{{ asset('images/gav.png') }}" style="max-width:20px;">ΓΑΒ LAB</a> | Implementation by<a href="http://innovation.gav.uop.gr" target="_blank">Χώρος Καινοτομίας του ΓΑΒ LAB</a><br/>
 
 
-                    <a href="{{route('about')}}" target="_blank">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}" target="_blank">Οδηγίες</a> | <a href="{{route('version')}}" target="_blank">Έκδοση 1.4 (firebrick)</a> | <a href="{{route('contact')}}" target="_blank">Επικοινωνία</a>
-                    <br/>additional graphics designed by <a href="https://www.facebook.com/aggelakosPnM/" target="_blank">Yannis Aggelakos</a> |
-                    Images for animal avatars by freepik (<a href="http://www.freepik.com" target="_blank">Designed by Freepik</a>) |
-                    tech support by <a href="http://osporos.com" target="_blank">O Sporos</a>
+                    <a href="{{route('quiz')}}" target="_blank">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}" target="_blank">Οδηγίες</a> | <a href="{{route('contact')}}" target="_blank">Επικοινωνία</a>
                     <br/>
                     @yield('footer')
                 </div>

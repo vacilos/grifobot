@@ -5,11 +5,68 @@ namespace App\Http\Controllers;
 use App\Math;
 use App\Plan;
 use App\Score;
+use App\Town;
+use App\Person;
 use Auth;
 use Illuminate\Http\Request;
 
 class PlanController extends Controller
 {
+
+
+    public function init(Request $request, Town $town) {
+        // get the username from a cookie
+        $username = null;
+        if($request->session()->exists("grif1821_user")) {
+            $username = $request->session()->get("grif1821_user");
+        }
+
+        if($username === null) {
+            return redirect(route('plan_login', ['town' => $town->id]));
+        }
+
+        $stats = Score::selectRaw('sum(score) as totalScore, people.username as username')
+            ->join('people', 'people.id', '=', 'scores.person_id')
+            ->join('plans', 'scores.plan_id', 'plans.id')
+            ->where('plans.level', '=', 1)
+            ->where('plans.town_id', '=', $town->id)
+            ->groupBy('people.username')
+            ->orderBy('totalScore', 'desc')
+            ->take(10)
+            ->get();
+        $statsΜ = Score::selectRaw('sum(score) as totalScore, people.username as username')
+            ->join('people', 'people.id', '=', 'scores.person_id')
+            ->join('plans', 'scores.plan_id', 'plans.id')
+            ->where('plans.level', '=', 2)
+            ->where('plans.town_id', '=', $town->id)
+            ->groupBy('people.username')
+            ->orderBy('totalScore', 'desc')
+            ->take(10)
+            ->get();
+        $statsΗ = Score::selectRaw('sum(score) as totalScore, people.username as username')
+            ->join('people', 'people.id', '=', 'scores.person_id')
+            ->join('plans', 'scores.plan_id', 'plans.id')
+            ->where('plans.level', '=', 3)
+            ->where('plans.town_id', '=', $town->id)
+            ->groupBy('people.username')
+            ->orderBy('totalScore', 'desc')
+            ->take(10)
+            ->get();
+
+        $user = Person::where('username', $username)->first();
+        if(!$user) {
+            return redirect(route('plan_login', ['town' => $town->id]));
+        }
+
+        $stat = Score::selectRaw('sum(score) as totalScore')
+            ->join('people', 'people.id', '=', 'scores.person_id')
+            ->where('people.id', '=', $user->id)
+            ->first();
+
+        return view('revolution.init', ['town' => $town, 'username' => $username, 'stats' => $stats, 'statsΜ' => $statsΜ, 'statsH' => $statsΗ, 'userstat' => $stat]);
+        // we may proceed
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -219,12 +276,27 @@ class PlanController extends Controller
      * @param  \App\Plan  $plan
      * @return \Illuminate\Http\Response
      */
-    public function play(Plan $plan)
+    public function play(Request $request, Plan $plan, $town)
     {
+        $username = null;
+        if($request->session()->exists("grif1821_user")) {
+            $username = $request->session()->get("grif1821_user");
+        }
+
+        if($username === null) {
+            return redirect(route('plan_login', ['town' => $town->id]));
+        }
+
+        $person = Person::where('username', $username)->first();
+        if($person == null) {
+            return redirect(route('plan_login', ['town' => $town->id]));
+        }
         $pattern = $plan->code;
         $pattern = json_decode($pattern);
         $size = $plan->size;
-        $level = $plan->level;
+
+        $town = Town::find($town);
+
         $blocked = array();
         $questions = array();
         foreach($pattern as $pat) {
@@ -236,81 +308,121 @@ class PlanController extends Controller
             }
         }
 
-        $scores = Score::where('plan_id', $plan->id)->orderBy('score','desc')->orderBy('movements', 'asc')->get();
-        //
-        return view('plans.play', compact('pattern', 'size', 'blocked', 'plan', 'questions', 'scores'));
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Plan  $plan
-     * @return \Illuminate\Http\Response
-     */
-    public function playKinder(Plan $plan)
-    {
-        $pattern = $plan->code;
-        $pattern = json_decode($pattern);
-        $size = $plan->size;
-        $level = $plan->level;
-        $blocked = array();
-        $questions = array();
-        foreach($pattern as $pat) {
-            if($pat->blocked == true) {
-                array_push($blocked, $pat->id);
-            }
-            if($pat->math == true) {
-                array_push($questions, $pat->id);
-            }
+        $user = Person::where('username', $username)->first();
+        if(!$user) {
+            return redirect(route('plan_login', ['town' => $town->id]));
         }
-        //
-        return view('plans.play_kinder', compact('pattern', 'size', 'blocked', 'plan', 'questions'));
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Plan  $plan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Plan $plan)
-    {
-        //
-    }
+        $userstat = Score::selectRaw('sum(score) as totalScore')
+            ->join('people', 'people.id', '=', 'scores.person_id')
+            ->where('people.id', '=', $user->id)
+            ->first();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Plan  $plan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Plan $plan)
-    {
-        //
+        return view('plans.play_revolution', compact('pattern', 'size', 'blocked', 'plan', 'questions', 'town', 'person', 'userstat'));
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Plan  $plan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Plan $plan)
-    {
-        //
-    }
+//    /**
+//     * Display the specified resource.
+//     *
+//     * @param  \App\Plan  $plan
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function playKinder(Plan $plan)
+//    {
+//        $pattern = $plan->code;
+//        $pattern = json_decode($pattern);
+//        $size = $plan->size;
+//        $level = $plan->level;
+//        $blocked = array();
+//        $questions = array();
+//        foreach($pattern as $pat) {
+//            if($pat->blocked == true) {
+//                array_push($blocked, $pat->id);
+//            }
+//            if($pat->math == true) {
+//                array_push($questions, $pat->id);
+//            }
+//        }
+//        //
+//        return view('plans.play_kinder', compact('pattern', 'size', 'blocked', 'plan', 'questions'));
+//    }
+//
+//    /**
+//     * Show the form for editing the specified resource.
+//     *
+//     * @param  \App\Plan  $plan
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function edit(Plan $plan)
+//    {
+//        //
+//    }
+//
+//    /**
+//     * Update the specified resource in storage.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @param  \App\Plan  $plan
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function update(Request $request, Plan $plan)
+//    {
+//        //
+//    }
+//
+//    /**
+//     * Remove the specified resource from storage.
+//     *
+//     * @param  \App\Plan  $plan
+//     * @return \Illuminate\Http\Response
+//     */
+//    public function destroy(Plan $plan)
+//    {
+//        //
+//    }
 
     /**
      * start and play
      */
-    public function startPlan($size, $level) {
+    public function startPlan($level,  $town) {
         //
-        $size = $size;
-        $level = $level;
-        $pattern = array();
+        $town = $town;
 
-        $mathQuestions = Math::where('level', $level)->where('personal',0)->orderBy(\DB::raw('RAND()'))->take(10)->get();
+        $questions  = 8;
+        $pattern = array();
+        $size = 5;
+        switch($level) {
+            case 2:
+                $size = 6;
+                $questions = 12;
+                break;
+            case 3:
+                $size = 7;
+                $questions = 15;
+                break;
+            default:
+                $size = 5;
+                break;
+        }
+
+        $town = Town::find($town);
+
+        $townQuestions = floor(0.5*$questions);
+
+        // get generic questions;
+        $mathQuestions = Math::where('level', $level)->where('town_id',null)->orderBy(\DB::raw('RAND()'))->take($questions)->get();
         $mathQuestionsArray = $mathQuestions->toArray();
+
+        // get town questions
+        $mathQuestionsTown = Math::where('town_id','=',$town->id)->orderBy(\DB::raw('RAND()'))->take($townQuestions)->get();
+        $mathQuestionsTownArray = $mathQuestionsTown->toArray();
+
+        // check how many questions are left after we get the questions of the town (maybe they are fewer than expected!)
+        $questionsLeft = $questions - sizeof($mathQuestionsTownArray);
+        $mathQuestionsArraySelect = array_slice($mathQuestionsArray, 0, $questionsLeft);
+
+        // form the final questions table!
+        $mathQuestionsFinal = array_merge($mathQuestionsTownArray, $mathQuestionsArraySelect);
+
 
         // define blocked
         $quantity_blocked = ceil($size*$size/7);
@@ -398,7 +510,6 @@ class PlanController extends Controller
         $index = 0;
 
         for($i = 1; $i <= $size*$size; $i++) {
-
             $pattern[$i]['id'] = $i;
             $pattern[$i]['blocked'] = false;
             $pattern[$i]['player'] = false;
@@ -410,7 +521,7 @@ class PlanController extends Controller
             }
             if(in_array($i, $maths)) {
                 $pattern[$i]['math'] = true;
-                $pattern[$i]['matheq'] = $mathQuestionsArray[$index]['id'];
+                $pattern[$i]['matheq'] = $mathQuestionsFinal[$index]['id'];
                 $index++;
             }
             if(in_array($i, $player)) {
@@ -420,31 +531,34 @@ class PlanController extends Controller
 
         $finalPlan = new Plan();
         $finalPlan->size = $size;
-        $finalPlan->level = $level;
+        $finalPlan->town_id = $town->id;
         $finalPlan->code = json_encode($pattern);
+        $finalPlan->level = $level;
 
         $finalPlan->save();
 
-        return redirect(route('play_plan', ['plan' => $finalPlan->id]));
+        return redirect(route('play_plan', ['plan' => $finalPlan->id, 'town' => $town]));
     }
 
-    public function startExPlan() {
+    public function startExPlan(Request $request, $level, Town $town) {
 
-        $user = Auth::user();
+        $username = $request->session()->get('grif1821_user');
 
-        $level = $user->level;
-
-        $userScores = Score::where('user_id', $user->id)->get()->pluck('id');
-
-        $newPlan = Plan::where('level','=',$user->level)->whereNotIn('id', $userScores)->orderBy(\DB::raw('RAND()'))->first();
-
-        if($newPlan == null) {
-            return redirect(route('start_plan', ['size' => 6, 'level' => $level]));
+        if($username === null) {
+            return redirect(route('plan_login', ['town' => $town->id]));
         }
 
+        $person = Person::where('username', $username)->first();
 
-        return redirect(route('play_plan', ['plan' => $newPlan->id]));
+        $userScores = Score::where('person_id', $person->id)->get()->pluck('plan_id');
 
+        $newPlan = Plan::where('level','=',$level)->where('town_id','=', $town)->whereNotIn('id', $userScores)->orderBy(\DB::raw('RAND()'))->first();
+
+        if($newPlan == null) {
+            return redirect(route('start_plan', ['level' => $level, 'town' => $town]));
+        }
+
+        return redirect(route('play_plan', ['plan' => $newPlan->id, 'town' => $town]));
     }
 
     public function startPlanKinder($size, $level, $diff) {

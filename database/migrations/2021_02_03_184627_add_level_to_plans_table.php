@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddStoryToMathsTable extends Migration
+class AddLevelToPlansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class AddStoryToMathsTable extends Migration
      */
     public function up()
     {
-        Schema::table('maths', function (Blueprint $table) {
+        Schema::table('plans', function (Blueprint $table) {
             //
-            $table->text("story")->nullable();
-
+            $table->integer('level')->nullable();
         });
     }
 
@@ -27,7 +26,7 @@ class AddStoryToMathsTable extends Migration
      */
     public function down()
     {
-        Schema::table('maths', function (Blueprint $table) {
+        Schema::table('quizzes', function (Blueprint $table) {
             //
         });
     }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.app_quiz')
 
 @section('stylesheet')
     <style>
@@ -75,36 +75,6 @@
                     </span>
                     <button id="bgo" onclick="go();" class="btn btn-lg btn-block btn-success"><i class="fa fa-play"></i> Ξεκίνα</button>
 
-                    <hr style="clear:both;"/>
-                    <h4>ΣΚΟΡ: <span id="score">0</span></h4>
-                    <hr/>
-                    <h4>Σκορ μαθητών</h4>
-                    <div id="challengemessage2"></div>
-
-                    <table class="table table-responsive table-sm table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Μαθητής</th>
-                            <th>Σκορ/Κινήσεις</th>
-                            <th>Ενέργειες</th>
-                        </tr>
-                        </thead>
-                        @foreach($scores as $score)
-                            <tr @if($score->user->id == Auth::user()->id) class="table-success" @endif >
-                                <td>
-                                    {{ $score->user->name }}
-                                </td>
-                                <td>
-                                    {{number_format($score->score, 0, ',','.')}} / {{ $score->movements }}
-                                </td>
-                                <td>
-                                    @if($score->user->id != Auth::user()->id)
-                                    <button class="btn btn-sm btn-danger" onclick="javascript:openChallenge('{{ $score->user->name  }}')">Κάνε Challenge</button>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
                 </div>
             </div>
         </div>

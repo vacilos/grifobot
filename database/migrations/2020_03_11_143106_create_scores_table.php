@@ -15,12 +15,12 @@ class CreateScoresTable extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('plan_id')->unsigned();
+            $table->bigInteger('person_id')->unsigned();
             $table->decimal('score');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('level');
+            $table->foreign('person_id')->references('id')->on('people');
             $table->foreign('plan_id')->references('id')->on('plans');
-
             $table->timestamps();
         });
     }

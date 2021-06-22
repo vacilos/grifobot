@@ -20,14 +20,6 @@
                     @csrf
                     @method('patch')
                     <div class="form-group">
-                        <label for="category">Κατηγορία</label>
-                        <select id="category" name="category" class="form-control">
-                            @foreach($categories as $category)
-                                <option value="{{ $category->id }}">{{$category->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="form-group">
                         <label for="mathquestion">Ερώτηση</label><br/>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-secondary btn-sm" onclick="javascript:showFractionModal();">Κλάσμα</button>
@@ -65,19 +57,31 @@
                         <small id="mathanswer_alt4help" class="form-text text-muted">Σε περιπτώσεις πολλαπλής επιλογής γράφετε μία "λάθος" απάντηση.</small>
                     </div>
                     <div class="form-group">
+                        <label for="mathstory">Ιστορία</label><br/>
+                        <textarea name="mathstory" class="form-control" id="mathstory" aria-describedby="mathstoryhelp" placeholder="Καταγραφή ιστορίας">{{ $math->story }}</textarea>
+                        <small id="mathstoryhelp" class="form-text text-muted">Καταγραφή της ιστορίας που σχετίζεται με την ερώτηση</small>
+                    </div>
+                    <div class="form-group">
                         <label for="mathlevel">Επίπεδο</label>
                         <select name="mathlevel" id="mathlevel" size="1" aria-describedby="mathlevelhelp" class="form-control">
-                            <option value="1" @if($math->level == 1) selected @endif>Α' Δημοτικού</option>
-                            <option value="2" @if($math->level == 2) selected @endif>Β' Δημοτικού</option>
-                            <option value="3" @if($math->level == 3) selected @endif>Γ' Δημοτικού</option>
-                            <option value="4" @if($math->level == 4) selected @endif>Δ' Δημοτικού</option>
-                            <option value="5" @if($math->level == 5) selected @endif>Ε' Δημοτικού</option>
-                            <option value="6" @if($math->level == 6) selected @endif>ΣΤ' Δημοτικού</option>
+                            <option value="1" @if($math->level == 1) selected @endif>Μικρό</option>
+                            <option value="2" @if($math->level == 2) selected @endif>Μεσαίο</option>
+                            <option value="3" @if($math->level == 3) selected @endif>Μεγάλο</option>
                             {{--                            <option value="7">Α' Γυμνασίου</option>--}}
                             {{--                            <option value="8">Β' Γυμνασίου</option>--}}
                             {{--                            <option value="9">Γ' Γυμνασίου</option>--}}
                         </select>
                         <small id="mathlevelhelp" class="form-text text-muted">Καταγράψτε το επίπεδο της άσκησης (τάξη)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mathtown">Πόλη</label>
+                        <select name="mathtown" id="mathtown" size="1"class="form-control">
+                            <option value="0">Γενική</option>
+                            @foreach($towns as $town)
+                                <option value="{{ $town->id }}" @if($math->town_id == $town->id) selected @endif>{{ $town->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-success">Υποβολή</button> <a href="{{route('maths.index')}}" class="btn btn-default">Επιστροφή</a>
                 </form>

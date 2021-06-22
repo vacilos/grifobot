@@ -13,17 +13,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Γριφομπότ by ΓΑΒ LAB</title>
+    <title>Γριφομπότ 1821 by Χώρος Καινοτομίας του ΓΑΒ LAB</title>
     <meta property="description" content="Παιχνίδι για μαθητές Δημοτικού και Νηπιαγωγείου για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα"/>
     <meta property="keywords" content="εκπαιδευτικό παιχνίδι, δημοτικό, παιχνίδι, ερωτήσεις, μαθηματικά, γλώσσα, ΓΑΒ LAB, Γριφομπότ, online παιχνίδι"/>
     <meta name="author" content="Ερευνητικό Εργαστήριο Γνώσης και Αβεβαιότητας - ΓΑΒ LAB">
     <meta property="og:title" content="Γριφομπότ by ΓΑΒ LAB">
     <meta property="og:description" content="Παιχνίδι για μαθητές Δημοτικού και Νηπιαγωγείου για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα">
-    <meta property="og:url" content="http://grifobot.gr"/>
+    <meta property="og:url" content="http://1821.grifobot.gr"/>
     <meta property="og:image" content="{{asset('images/logo.png')}}"/>
     <meta property="fb:app_id" content="713822995484844"/>
 
-    <meta name=”twitter:title” content=”White Γριφομπότ by ΓΑΒ LAB”>
+    <meta name=”twitter:title” content=”White Γριφομπότ 1821 by Χώρος Καινοτομίας του ΓΑΒ LAB”>
     <meta name=”twitter:description” content=”Παιχνίδι για μαθητές Δημοτικού και Νηπιαγωγείου για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα.”>
     <meta name=”twitter:image” content=”http://grifobot.gr”>
     <link rel="icon" href="{{ asset('images/favicon.ico') }}">
@@ -33,8 +33,8 @@
 
     <script src="{{asset('bootstrap/bootstrap.bundle.min.js')}}"></script>
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap&subset=greek" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif&display=swap" rel="stylesheet">
     <!-- Styles -->
 {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link href="{{ asset('bootstrap/bootstrap.min.css') }}" rel="stylesheet">
@@ -44,7 +44,7 @@
         html, body {
             background-color: #fff;
             color: #636b6f;
-            font-family: 'Nunito', sans-serif;
+            font-family: 'Noto Serif', serif;
             font-weight: 200;
             margin: 0;
         }
@@ -85,6 +85,14 @@
             text-transform: uppercase;
         }
 
+        a {
+            color: #636b6f;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: .1rem;
+            text-decoration: none;
+        }
+
         .m-b-md {
             margin-bottom: 30px;
         }
@@ -96,144 +104,84 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/el_GR/sdk.js#xfbml=1&autoLogAppEvents=1&version=v6.0&appId=713822995484844"></script>
 <body>
 <div>
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/user/home') }}">ΑΡΧΙΚΗ</a>
-            @else
-                <a href="{{ route('login') }}">ΕΙΣΟΔΟΣ</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">ΕΓΓΡΑΦΗ</a>
-                @endif
-            @endauth
-        </div>
-    @endif
-
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
                     <div class="title">
-                        Γριφο<span style="color: firebrick;">μπότ</span> <span style="font-size: 11px;">έκδοση 1.4</span>
+                        Γριφο<span style="color: firebrick;">μπότ</span> της <span style="color: #1b4b72">Επανάστασης</span>
                     </div>
-                    <div>
-                        <a href="{{route('about')}}">Τι είναι το ΓΡΙΦΟΜΠΟΤ</a> | <a href="{{route('help')}}">Οδηγίες</a> | <a href="{{route('version')}}">Έκδοση 1.4 (firebrick)</a>
-                    </div>
+
                     <div>
                         <p>
-                            Παιχνίδι για μαθητές <b>ΔΗΜΟΤΙΚΟΥ ΚΑΙ ΝΗΠΙΑΓΩΓΕΙΟΥ</b> για να κάνουν ασκήσεις γλώσσας και μαθηματικών συνδυαστικά με στοιχεία εκμάθησης κώδικα
+                            Θεματικό παιχνίδι με ερωτήσεις ιστορίας για τον εορτασμό των 200 ετών από την επανάσταση του 1821.
                         </p>
                     </div>
-                    <div class="m-b-md">
-                        <a href="{{route('user_home')}}" class="btn btn-lg btn-success">ΠΑΙΞΕ ΤΩΡΑ</a>
-                    </div>
-                    <div class="alert alert-danger">
-                        Νέα έκδοση!!!<br/>
-                        Γριφομπότ ΚΟΥΙΖ! Δείτε τι είναι πατώντας <a href="{{route('quiz')}}">ΕΔΩ</a><br/><br/>
-                        Βρείτε στο ακόλουθο ελεύθερα ΚΟΥΙΖ <br/><a href="{{route('quiz_public')}}" class="btn btn-lg btn-danger">Γριφομπότ ΚΟΥΙΖ!</a>
-                    </div>
-
-
-                    <div class="fb-like m-b-md" data-href="https://facebook.com/grifobot" data-width="480" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-3">
-                    <table class="table table-striped table-bordered table-sm">
-                        <thead>
-                        <tr>
-                            <td colspan="3">
-                                <h3>
-                                    Top 10 <small class="text-muted">(7 ημερών)</small>
-                                </h3>
-                            </td>
-                        </tr>
-                        </thead>
-                        @foreach($stats7 as $stat)
-                            <tr>
-                                <td>
-                                    {{$loop->index+1}}
-                                </td>
-                                <td class="text-left">
-                                    <img src="{{asset('images')}}/{{$stat->avatar}}" class="img-fluid" style="max-width:20px;"/>&nbsp; {{$stat->username}}
-                                </td>
-                                <td>
-                                    {{number_format($stat->totalScore, 0, ',','.')}}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-                <div class="col-sm-3">
-                    <table class="table table-striped table-bordered table-sm">
-                        <thead>
-                        <tr>
-                            <td colspan="3">
-                                <h3>
-                                    Hall of Fame
-                                </h3>
-                            </td>
-                        </tr>
-                        </thead>
-                        @foreach($hof as $stat)
-                            <tr>
-                                <td>
-                                    {{$loop->index+1}}
-                                </td>
-                                <td class="text-left">
-                                    <img src="{{asset('images')}}/{{$stat->avatar}}" class="img-fluid" style="max-width:20px;"/>&nbsp; {{$stat->username}}
-                                </td>
-                                <td>
-                                    {{number_format($stat->totalScore, 0, ',','.')}}
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-                <div class="col-sm-6">
-                    <table class="table table-striped table-bordered table-sm">
-                        <thead>
-                        <tr>
-                            <td colspan="4">
-                                <h3>
-                                    Top 10 Δήμοι
-                                </h3>
-                            </td>
-                        </tr>
-                        </thead>
-                        @foreach($municipalStats as $stat)
-                            <tr>
-                                <td>
-                                    {{$loop->index+1}}
-                                </td>
-                                <td>
-                                    Δήμος {{ $stat->dimos }}
-                                </td>
-                                <td>
-                                    {{$stat->totalUsers}} μαθητές
-                                </td>
-                                <td>
-                                    {{number_format($stat->totalScore, 0, ',','.')}} πόντοι
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
+                <div class="col-sm-12">
+                    <div class="card-deck">
 
+                    <div class="card">
+                        <a href="http://1821.grifobot.gr/t/messini">
+                        <img src="{{ asset('1821/images/messini.jpeg') }}" class="card-img-top img-fluid" alt="Δήμος Μεσσήνης">
+                        <div class="card-body">
+                            <h5 class="card-title">Δήμος Μεσσήνης</h5>
+                            <p class="card-text">Η Μεσσήνη στην επανάσταση του 1821</p>
+
+                        </div>
+                        </a>
+                    </div>
+
+
+                    <div class="card">
+                        <a href="http://1821.grifobot.gr/t/ermionida">
+                        <img src="{{ asset('1821/images/ermionida.jpeg') }}" class="card-img-top img-fluid" alt="Δήμος Ερμιονίδας">
+                        <div class="card-body">
+                            <h5 class="card-title">Δήμος Ερμιονίδας</h5>
+                            <p class="card-text">Η Ερμιονίδα στην επανάσταση του 1821</p>
+                        </div>
+                        </a>
+                    </div>
+
+
+                        <div class="card">
+                            <a href="http://1821.grifobot.gr/t/trifylia">
+                                <img src="{{ asset('1821/images/trifylia.jpeg') }}" class="card-img-top img-fluid" alt="Δήμος Τριφυλία">
+                                <div class="card-body">
+                                    <h5 class="card-title">Δήμος Τριφυλίας</h5>
+                                    <p class="card-text">Η Τριφυλία στην επανάσταση του 1821</p>
+
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <div class="row mt-5">
+                <div class="col-sm-12"></div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-sm-12">
+                    <div>
+                        <a href="http://grifobot.gr">Γριφομπότ</a> | <a href="{{route('about')}}">Τι είναι το Γριφομπότ της Επανάστασης</a> | <a href="{{route('help')}}">Οδηγίες</a>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="row">
                 <div class="col-sm-12">
-                    <div style="font-size:18px;">
+                    <div style="font-size:11px;">
                         <br/><br/>
-                        Application designed with <i class="fa fa-heart" style="color: red;"></i> by <a href="http://gav.uop.gr"><img src="{{ asset('images/gav.png') }}" style="max-width:20px;">ΓΑΒ LAB</a><br/><br/>
+                        Application designed with <i class="fa fa-heart" style="color: red;"></i> by <a href="http://gav.uop.gr" target="_blank"><img src="{{ asset('images/gav.png') }}" style="max-width:20px;">ΓΑΒ LAB</a> and <a href="http://innovation.gav.uop.gr" target="_blank">Χώρος Καινοτομίας του ΓΑΒ LAB</a><br/><br/>
                     </div>
 
                     <hr/>
                     <small>
-                        additional graphics designed by <a href="https://www.facebook.com/aggelakosPnM/" target="_blank">Yannis Aggelakos</a><br/>
-                        images for animal avatars by freepik (<a href="http://www.freepik.com" target="_blank">Designed by Freepik</a>)<br/>
                         tech support by <a href="http://osporos.com">O Sporos</a>
                     </small>
                 </div>

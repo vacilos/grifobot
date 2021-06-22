@@ -15,7 +15,6 @@ class AddPersonalToMathsTable extends Migration
     {
         Schema::table('maths', function (Blueprint $table) {
             //
-            $table->boolean('personal')->nullable()->default(0);
         });
     }
 

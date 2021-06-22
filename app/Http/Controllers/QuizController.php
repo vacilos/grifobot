@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Math;
 use App\Plan;
+use App\Town;
 use App\Quiz;
 use App\QuizScore;
 use App\Score;
@@ -13,6 +14,12 @@ use Illuminate\Http\Request;
 
 class QuizController extends Controller
 {
+
+
+    public function index() {
+        $quizzes = Quiz::all();
+        return view('quiz.index', compact('quizzes'));
+    }
     /**
      * Display a listing of the resource.
      *
@@ -179,7 +186,8 @@ class QuizController extends Controller
      */
     public function create()
     {
-        return view('quiz.create');
+        $towns = Town::all();
+        return view('quiz.create', compact('towns'));
     }
 
     /**
@@ -197,19 +205,24 @@ class QuizController extends Controller
             'quizdesc' => 'nullable',
             'quizlevel' => 'required',
             'quizsize' => 'required',
-            'quizexercise' => 'required',
-            'quizpublic' => 'required',
-            'quizenddate' => 'nullable',
         ]);
 
         $quiz = new Quiz();
         $quiz->name = $request->quizname;
         $quiz->size = $request->quizsize;
         $quiz->level = $request->quizlevel;
-        $quiz->exercise = $request->quizexercise;
+        //
+        if($quiz->level == 1) {
+            $quiz->excersice = 8;
+        } else if($quiz->level == 2) {
+            $quiz->excersice = 12;
+        } else if ($quiz->level == 3) {
+            $quiz->excersice = 15;
+        }
+
         $quiz->user_id = $user->id;
-        $quiz->public = $request->quizpublic;
-        $quiz->end_date = ($request->quizdate == NULL)?null:$request->quizdate;
+        $quiz->public = 1;
+        $quiz->end_date = null;
         $quiz->description = ($request->quizdesc==null)?null:$request->quizdesc;
 
         $quiz->save();
