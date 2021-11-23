@@ -1,137 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="532d04eb-45c8-45c9-a828-b952e43a4c64" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Classroom.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/ClassroomController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/QuizController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Http/Controllers/QuizScoreController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/Quiz.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/QuizScore.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_10_150748_create_classrooms_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_10_151440_add_user_id_to_plans.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_20_193814_add_personal_to_maths_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_20_194135_create_quizzes_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_21_120422_create_quiz_math_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_22_094420_create_quiz_scores_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_22_184627_add_end_date_to_quizzes_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/migrations/2020_04_22_193819_add_public_to_quizzes_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/Manoyri-Regular.eot" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/Manoyri-Regular.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/Manoyri-Regular.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/Manoyri-Regular.woff" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/css/Manoyri-Regular.woff2" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/dt/moment.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/bomb.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/bone.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/brain.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/grass.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/stone.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/target.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/css/select2.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/css/select2.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/af.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/az.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/bg.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/bn.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/bs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ca.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/cs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/da.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/de.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/dsb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/el.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/en.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/es.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/et.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/eu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/fa.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/fi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/fr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/gl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/he.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/hi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/hr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/hsb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/hu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/hy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/id.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/is.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/it.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ja.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ka.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/km.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ko.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/lt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/lv.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/mk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ms.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/nb.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ne.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/nl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/pl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ps.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/pt-BR.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/pt.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ro.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/ru.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/sk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/sl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/sq.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/sr-Cyrl.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/sr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/sv.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/th.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/tk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/tr.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/uk.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/vi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/zh-CN.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/i18n/zh-TW.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/select2.full.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/select2.full.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/select2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/select2/js/select2.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/layouts/app_quiz.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/plans/design.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/plans/designstart.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/addquestion.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/create.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/editquestion.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/index.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/myquiz.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/name.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/play.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/public.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/questions.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/results.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/resultsteacher.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/show.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/quiz/start.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/Laravel_11_20_20__3_05_PM.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/commandlinetools/schemas/frameworkDescriptionVersion1.1.4.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/header_image-min.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/k-10.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/k-11.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/k-12.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/k-13.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/k-14.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/k-15.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/kal-1.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/kal-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/kal-3.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/kal-4.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/kal-5.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/kal-6.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/kal-7.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/kal-8.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/1821/images/kalamata/kal-9.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/revolution/kalamata.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/maths.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/maths.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Helpers/Helper.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Helpers/Helper.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/MathController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/MathController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlanController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlanController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TournamentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TournamentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/CheckRole.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/CheckRole.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Math.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Math.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/gav.png" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/gav.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/helpers/update.sql" beforeDir="false" afterPath="$PROJECT_DIR$/resources/helpers/update.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/plans/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/plans/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/user/createprofile.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/user/createprofile.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/version.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/version.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/quiz/addquestion.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/quiz/addquestion.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,9 +37,7 @@
   </component>
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -165,8 +60,20 @@
         <option name="title" value="All" />
       </GitPushTagMode>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="MERGE" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
@@ -259,13 +166,19 @@
       <path value="$PROJECT_DIR$/vendor/doctrine/dbal" />
       <path value="$PROJECT_DIR$/vendor/doctrine/event-manager" />
       <path value="$PROJECT_DIR$/vendor/doctrine/cache" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/deprecation-contracts" />
+      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/vendor/symfony/http-client-contracts" />
+      <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
     </include_path>
   </component>
   <component name="ProjectId" id="1Yz5Q9WirWbD9bkwkbBmlP9Fzws" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -273,20 +186,23 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/quiz" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/views/revolution" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="IntelliLang.Configuration" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/quiz" />
-      <recent name="$PROJECT_DIR$/resources/views" />
-      <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/public/st" />
-      <recent name="$PROJECT_DIR$/resources/views/layouts" />
+      <recent name="$PROJECT_DIR$/resources/views/revolution" />
+      <recent name="$PROJECT_DIR$/public/1821/images" />
+      <recent name="$PROJECT_DIR$/public/1821" />
+      <recent name="$PROJECT_DIR$/resources/views/town" />
+      <recent name="$PROJECT_DIR$/database/migrations" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/1821/images/kalamata" />
       <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/public/1821/images" />
       <recent name="$PROJECT_DIR$/resources/views" />
       <recent name="$PROJECT_DIR$/resources/lang" />
     </key>
@@ -297,9 +213,7 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="ServiceViewManager">
-    <option name="showServicesTree" value="false" />
-  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -339,7 +253,41 @@
       <workItem from="1587111826193" duration="519000" />
       <workItem from="1587400210542" duration="29945000" />
       <workItem from="1587630605593" duration="7255000" />
-      <workItem from="1587709578663" duration="1348000" />
+      <workItem from="1587709578663" duration="8803000" />
+      <workItem from="1587911830519" duration="9094000" />
+      <workItem from="1588053115480" duration="2065000" />
+      <workItem from="1588580959210" duration="1368000" />
+      <workItem from="1589354092925" duration="492000" />
+      <workItem from="1593511336857" duration="675000" />
+      <workItem from="1597650437665" duration="793000" />
+      <workItem from="1600228634328" duration="304000" />
+      <workItem from="1600629726967" duration="7406000" />
+      <workItem from="1600686603804" duration="4725000" />
+      <workItem from="1605877505623" duration="2380000" />
+      <workItem from="1606223963822" duration="5441000" />
+      <workItem from="1607933190896" duration="1617000" />
+      <workItem from="1608127159346" duration="1663000" />
+      <workItem from="1609757752440" duration="8678000" />
+      <workItem from="1610533469219" duration="8474000" />
+      <workItem from="1611513457060" duration="7314000" />
+      <workItem from="1611754508245" duration="612000" />
+      <workItem from="1612125018142" duration="51552000" />
+      <workItem from="1612561492594" duration="12229000" />
+      <workItem from="1613459166358" duration="5751000" />
+      <workItem from="1614055263069" duration="2857000" />
+      <workItem from="1614690157180" duration="35000" />
+      <workItem from="1614690223173" duration="980000" />
+      <workItem from="1615398388257" duration="154000" />
+      <workItem from="1616344079410" duration="2055000" />
+      <workItem from="1616562698305" duration="9000" />
+      <workItem from="1618313023104" duration="7548000" />
+      <workItem from="1618549938825" duration="4212000" />
+      <workItem from="1620054817602" duration="6774000" />
+      <workItem from="1620726881846" duration="3629000" />
+      <workItem from="1624381711156" duration="2381000" />
+      <workItem from="1625063937400" duration="685000" />
+      <workItem from="1637137315854" duration="6459000" />
+      <workItem from="1637248316397" duration="737000" />
     </task>
     <task id="LOCAL-00001" summary="version1.1">
       <created>1585333983826</created>
@@ -383,11 +331,39 @@
       <option name="project" value="LOCAL" />
       <updated>1586520308832</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="version 1.4 quiz">
+      <created>1587803546129</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1587803546129</updated>
+    </task>
+    <task id="LOCAL-00008" summary="version 1.4.1 &#10;images in quizzes&#10;minor bug corrections in quiz&#10;changes in UI&#10;bootstrap installed">
+      <created>1588054026233</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1588054026233</updated>
+    </task>
+    <task id="LOCAL-00009" summary="version 1.5&#10;firebrick">
+      <created>1611513561411</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1611513561411</updated>
+    </task>
+    <task id="LOCAL-00010" summary="1821 version">
+      <created>1624382076592</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1624382076592</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -396,76 +372,10 @@
     <MESSAGE value="version1.2" />
     <MESSAGE value="version 1.3" />
     <MESSAGE value="version 1.3 patches" />
-    <option name="LAST_COMMIT_MESSAGE" value="version 1.3 patches" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="320" y="127" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584005221407">
-      <screen x="0" y="23" width="1440" height="877" />
-    </state>
-    <state x="320" y="127" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1584005221407" />
-    <state x="420" y="271" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1584003744224">
-      <screen x="0" y="23" width="1440" height="877" />
-    </state>
-    <state x="420" y="271" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1584003744224" />
-    <state x="2341" y="306" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1587542056286">
-      <screen x="1680" y="23" width="1920" height="1057" />
-    </state>
-    <state x="495" y="258" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1584014829446" />
-    <state x="2341" y="306" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1587542056286" />
-    <state x="578" y="298" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1584782656168" />
-    <state x="2251" y="154" key="CommitChangelistDialog2" timestamp="1586520308685">
-      <screen x="1680" y="23" width="1920" height="1057" />
-    </state>
-    <state x="2251" y="154" key="CommitChangelistDialog2/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1586520308685" />
-    <state x="4171" y="154" key="CommitChangelistDialog2/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@3600.23.1920.1057" timestamp="1586415528008" />
-    <state x="2432" y="480" key="NewPhpFileDialog" timestamp="1587471539336">
-      <screen x="1680" y="23" width="1920" height="1057" />
-    </state>
-    <state x="2432" y="480" key="NewPhpFileDialog/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1587471539336" />
-    <state x="658" y="467" key="NewPhpFileDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1583937494533" />
-    <state x="2132" y="175" key="SettingsEditor" timestamp="1584523347395">
-      <screen x="1680" y="23" width="1920" height="1057" />
-    </state>
-    <state x="2132" y="175" key="SettingsEditor/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1584523347395" />
-    <state x="2240" y="291" key="Vcs.Push.Dialog.v2" timestamp="1586520319749">
-      <screen x="1680" y="23" width="1920" height="1057" />
-    </state>
-    <state x="2240" y="291" key="Vcs.Push.Dialog.v2/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1586520319749" />
-    <state x="517" y="369" key="com.intellij.ide.util.TipDialog" timestamp="1587709580919">
-      <screen x="0" y="23" width="1680" height="1027" />
-    </state>
-    <state x="517" y="369" key="com.intellij.ide.util.TipDialog/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@0.23.1680.1027" timestamp="1587709580919" />
-    <state x="2271" y="379" key="com.intellij.ide.util.TipDialog/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1587630608279" />
-    <state x="4191" y="379" key="com.intellij.ide.util.TipDialog/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@3600.23.1920.1057" timestamp="1586256828265" />
-    <state x="517" y="369" key="com.intellij.ide.util.TipDialog/0.23.1680.1027@0.23.1680.1027" timestamp="1583932567974" />
-    <state x="2445" y="460" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587538021919">
-      <screen x="1680" y="23" width="1920" height="1057" />
-    </state>
-    <state x="2445" y="460" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1587538021919" />
-    <state x="3697" y="23" width="1446" height="1037" key="dock-window-1" timestamp="1587462761590">
-      <screen x="3600" y="23" width="1920" height="1057" />
-    </state>
-    <state x="3697" y="23" width="1446" height="1037" key="dock-window-1/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1587462761590" />
-    <state x="3885" y="23" width="1446" height="1037" key="dock-window-2" timestamp="1587463032590">
-      <screen x="3600" y="23" width="1920" height="1057" />
-    </state>
-    <state x="3885" y="23" width="1446" height="1037" key="dock-window-2/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1587463032590" />
-    <state x="2161" y="268" width="957" height="567" key="find.popup" timestamp="1587569947499">
-      <screen x="1680" y="23" width="1920" height="1057" />
-    </state>
-    <state x="2161" y="268" width="957" height="567" key="find.popup/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1587569947499" />
-    <state x="421" y="261" width="837" height="550" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1584782640782" />
-    <state x="2456" y="404" key="git4idea.ui.GitTagDialog" timestamp="1586106355558">
-      <screen x="1680" y="23" width="1920" height="1057" />
-    </state>
-    <state x="2456" y="404" key="git4idea.ui.GitTagDialog/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1586106355558" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1587803155141">
-      <screen x="0" y="23" width="1680" height="1027" />
-    </state>
-    <state x="433" y="217" width="670" height="578" key="search.everywhere.popup/0.23.1440.877/-1920.23.1920.1057@0.23.1440.877" timestamp="1584006028362" />
-    <state x="505" y="250" width="671" height="677" key="search.everywhere.popup/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@0.23.1680.1027" timestamp="1585720834272" />
-    <state x="2257" y="257" width="766" height="696" key="search.everywhere.popup/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@1680.23.1920.1057" timestamp="1587662077287" />
-    <state x="4177" y="257" width="766" height="696" key="search.everywhere.popup/0.23.1680.1027/3600.23.1920.1057/1680.23.1920.1057@3600.23.1920.1057" timestamp="1587709642132" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1587803155141" />
+    <MESSAGE value="version 1.4 quiz" />
+    <MESSAGE value="version 1.4.1 &#10;images in quizzes&#10;minor bug corrections in quiz&#10;changes in UI&#10;bootstrap installed" />
+    <MESSAGE value="version 1.5&#10;firebrick" />
+    <MESSAGE value="1821 version" />
+    <option name="LAST_COMMIT_MESSAGE" value="1821 version" />
   </component>
 </project>

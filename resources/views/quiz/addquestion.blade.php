@@ -100,9 +100,8 @@
 
 @section('javascript')
 
-    <script type="text/javascript">
 
-    $(document).ready(function() {
+        $(document).ready(function() {
         $("#mathForm").on("submit", function(){
             var ans1 = $("#mathanswer_alt1").val();
             var ans2 = $("#mathanswer_alt2").val();
@@ -127,7 +126,7 @@
 
         $('#mathquestion').val(function(i, text) {
             return text + quote;
-        });;
+        });
     }
 
     function showFractionModal() {
